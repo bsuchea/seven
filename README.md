@@ -1,6 +1,6 @@
 ## seven
 
-# git clone https://github.com/bsuchea/seven.git
+git clone https://github.com/bsuchea/seven.git
 
 git add .
 
