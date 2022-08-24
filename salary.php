@@ -81,69 +81,58 @@ require_once 'inc/html_head.php';
                         <h1 style="font-family: 'Kh Dangrek'; color:#15a362; font-size:large"
                             class="app-page-title mb-2">ទំព័រប្រាក់បៀរវត្ស</h1>
                     </div>
-                    <div class="p-3">
+                    <div class="container bg-white p-3 mt-3 shadow p-3 mb-5 bg-body rounded-4">
                         <form action="#" method="post">
                             <div class="form-row">
-                                <div class="form-group col-md-4">
-                                    <label for="inputID">Vendor Name</label>
-                                    <input name="vendor_name" class="form-control" type="text" placeholder="Vendor Name">
-                                </div>
-                                <div class="form-group col-md-4">
-                                    <label for="form-select" class="form-label">Gender</label>
-                                    <select name="vendor_gender" class="form-select">
-                                        <option hidden value="">Select Gender</option>
-                                        <option value="Male">Male</option>
-                                        <option value="Female">Female</option>
+                                <div class="form-group col-md-6">
+                                    <label for="form-select" class="form-label" >Vendor Name</label>
+                                    <select name="vendor_name" class="form-select" required>
+                                        <option hidden value="">Select Vendor</option>
+                                        <option value="Ses Sovankiri">Ses Sovankiri</option>
+                                        <option value="Siv Sovathanak">Siv Sovathanak</option>
+                                        <option value="Long Pheak">Long Pheak</option>
                                     </select>
                                 </div>
-                                <div class="form-group col-md-4">
-                                    <label for="inputID">Vendor Phone</label>
-                                    <input name="vendor_phone" class="form-control" type="text" placeholder="Vendor Phone">
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group col-md-4">
-                                    <label class="form-label">Vendor Email</label>
-                                    <input type="email" name="vendor_email" class="form-control" placeholder="Vendor Email">
-                                </div>
-                                <div class="form-group col-md-4">
-                                    <label class="form-label">Vendor Address</label>
-                                    <input type="text" name="vendor_address" class="form-control" placeholder="Vendor Address">
-                                </div>
-                                <div class="form-group col-md-4">
+                                <div class="form-group col-md-6">
                                     <label class="form-label">Salary</label>
-                                    <input type="text" name="salary" class="form-control" placeholder="Salary">
+                                    <input type="text" name="salary" class="form-control" placeholder="Salary"  required>
                                 </div>
                                 </div>
 
                                 <div class="form-row">
-                                <div class="form-group col-md-4">
+                                <div class="form-group col-md-6">
                                     <label class="form-label">Bonus</label>
                                     <input type="text" name="bonus" class="form-control" placeholder="Bonus">
                                 </div>
-                                <div class="form-group col-md-4">
+                                <div class="form-group col-md-6">
                                     <label class="form-label">Date</label>
-                                    <input type="date" name="salary_date" class="form-control" placeholder="Date">
+                                    <input type="date" name="salary_date" class="form-control" placeholder="Date" required>
                                 </div>
+                                </div>
+                                <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label class="form-label">Notes</label>
+                                    <textarea class="form-control" rows="10" cols="10">
 
+                                    </textarea>
                                 </div>
-                            </div>
+                                </div>
                             <div class="text-center mt-3">
                                 <button name="add_salary" type="submit" class="btn btn-success">Done</button>
                                 <button type="reset" class="btn btn-danger">Cancel</button>
+                            </div>
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
         </div><!--//container-fluid-->
-    </div><!--//app-content-->
-
+        
     <footer id="footbarlog" class="app-footer">
         <?php include('inc/footer.php') ?>
     </footer><!--//app-footer-->
 
-</div>
+    </div><!--//app-content-->
 
 <!-- ::: My Script ::: -->
 <?php include('contents/My_Scripts.php') ?>
