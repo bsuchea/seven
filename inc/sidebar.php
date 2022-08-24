@@ -42,7 +42,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link <?= ($p=="item")?'active':'' ?>" href="item.php">
+                        <a class="nav-link <?= ($p=="item" || $p=="item_create" || $p=="item_edit")?'active':'' ?>" href="item.php">
 						        <span class="nav-icon">
 						        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-folder"
                                      fill="currentColor" >

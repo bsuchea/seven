@@ -121,8 +121,8 @@ require_once 'inc/html_head.php';
                                 <button name="add_salary" type="submit" class="btn btn-success">Done</button>
                                 <button type="reset" class="btn btn-danger">Cancel</button>
                             </div>
-                            </div>
                         </form>
+                        </div>
                     </div>
                 </div>
             </div>

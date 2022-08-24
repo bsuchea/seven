@@ -75,19 +75,18 @@ require_once 'inc/html_head.php';
                     <div class="col-auto ">
                         <h1 style="font-family: 'Kh Dangrek'; color:#15a362; font-size:large"
                             class="app-page-title mb-2">ទំព័រព័ត៌មានអ្នកផ្គត់ផ្គង់</h1>
-                        <a href="suppliers.php">
-                            <button id="form_load" type="button" class="btn btn-success btn-sm col-9 mx-auto m-2">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    </div>
+                    <div class="container bg-white p-3 mt-3 shadow p-3 mb-5 bg-body rounded-4">
+                        <form action="#" method="post">
+                            <div class="mb-3">
+                            <a href="suppliers.php" title="Back">
+                                <svg width="25" height="25" fill="green"
                                      class="bi bi-arrow-left-circle" viewBox="0 0 16 16">
                                     <path fill-rule="evenodd"
                                           d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-4.5-.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"/>
                                 </svg>
-                                Back View
-                            </button>
-                        </a>
-                    </div>
-                    <div class="p-3">
-                        <form action="#" method="post">
+                            </a>
+                            </div>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="inputID">Full Name</label>
@@ -124,17 +123,20 @@ require_once 'inc/html_head.php';
                                 <button type="reset" class="btn btn-danger">Cancel</button>
                             </div>
                         </form>
+                        </div>
                     </div>
                 </div>
             </div>
         </div><!--//container-fluid-->
+
+        <footer id="footbarlog" class="app-footer">
+        <?php include('inc/footer.php') ?>
+        </footer><!--//app-footer-->
+
     </div><!--//app-content-->
 
-    <footer id="footbarlog" class="app-footer">
-        <?php include('inc/footer.php') ?>
-    </footer><!--//app-footer-->
 
-</div>
+
 
 <!-- ::: My Script ::: -->
 <?php include('contents/My_Scripts.php') ?>
