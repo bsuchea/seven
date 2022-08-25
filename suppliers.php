@@ -180,8 +180,17 @@ require_once 'inc/html_head.php';
         }).then((result) => {
             if (result.isConfirmed) {
                 // Ajax proceesing or redirect back
-                $('#sup'+id).fadeOut();
-                Swal.fire('Deleted!', '', 'success');
+                $.ajax({
+                    url: 'ajax/supplier_delete.php',
+                    cache: false,
+                    data: {id: id},
+                    success: function(e){
+                        $('#sup'+id).fadeOut();
+                        Swal.fire(e, '', 'success');
+                    }, error: function(e){
+                        console.log(e.responseText); 
+                    }
+                });
             }
         })
     }
