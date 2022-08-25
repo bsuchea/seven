@@ -21,19 +21,16 @@ require_once 'inc/html_head.php';
 
         <?php
 
-        if (isset($_POST['add_cus'])) {
-            $name = $_POST['name'];
-            $gender = $_POST['gender'];
-            $email = $_POST['email'];
-            $phone = $_POST['phone'];
-            $address = $_POST['address'];
+        if (isset($_POST['add_item'])) {
+            $item_name = $_POST['item_name'];
+            $brand_name = $_POST['brand_name'];
+            $category = $_POST['category'];
+            $current_stock = $_POST['current_stock'];
+            $unit_price = $_POST['unit_price'];
+            $created_date = $_POST['created_date'];
+            $description = $_POST['description'];
 
-            // date_default_timezone_set('Asia/Bangkok');
-            // $created_date = date('Y/m/d h:i:s a', time());
-            // $updated_date = date('Y/m/d h:i:s a', time());
-            // $status = 1;
-
-            if (empty($name) || empty($gender) || empty($phone) || empty($email) || empty($address)) {
+            if (empty($item_name) || empty($brand_name) || empty($category) || empty($current_stock) || empty($unit_price) || empty($created_date)) {
                 echo '
 				<div class="alert alert-warning alert-dismissible fade show">
 					<strong>Message!</strong> Please input a correct data.
@@ -42,13 +39,17 @@ require_once 'inc/html_head.php';
 			';
             } else {
 
-                $sql = $con->prepare("INSERT INTO tbl_customer(customer_name, customer_gender, customer_email, customer_phone, customer_address, status) VALUES(?, ?, ?, ?, ?, ?)");
-                $sql->bindParam(1, $name);
-                $sql->bindParam(2, $gender);
-                $sql->bindParam(3, $email);
-                $sql->bindParam(4, $phone);
-                $sql->bindParam(5, $address);
-                $sql->bindParam(6, $status);
+                $sql = $con->prepare("INSERT INTO tbl_item(item_name, brand_id, 
+                                    category_id, current_stock, unit_price, created_date, item_description, status) 
+                                    VALUES(?, ?, ?, ?, ?, ?, ?, ?)");
+                $sql->bindParam(1, $item_name);
+                $sql->bindParam(2, $brand_name);
+                $sql->bindParam(3, $category);
+                $sql->bindParam(4, $current_stock);
+                $sql->bindParam(5, $unit_price);
+                $sql->bindParam(6, $created_date);
+                $sql->bindParam(7, $description);
+                $sql->bindParam(8, $status);
 
                 if ($sql->execute()) {
                     echo '
@@ -96,24 +97,24 @@ require_once 'inc/html_head.php';
                                     <label for="form-select" class="form-label">Brand</label>
                                     <select name="brand_name" class="form-select">
                                         <option hidden value="">Select Brand</option>
-                                        <option value="MSI">MSI</option>
-                                        <option value="TUF">TUF</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
                                     </select>
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label for="form-select" class="form-label">Category</label>
                                     <select name="category" class="form-select">
                                         <option hidden value="">Select Category</option>
-                                        <option value="Mouse">Mouse</option>
-                                        <option value="Monitor">Monitor</option>
-                                        <option value="Headset">Headset</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-4">
                                     <label class="form-label">Quantity</label>
-                                    <input type="number" name="qty" class="form-control" placeholder="Quantity">
+                                    <input type="number" name="current_stock" class="form-control" placeholder="Quantity">
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label class="form-label">Unit Price</label>
@@ -121,12 +122,20 @@ require_once 'inc/html_head.php';
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label class="form-label">Created Date</label>
-                                    <input type="date" name="date" class="form-control" placeholder="Created Date">
+                                    <input type="date" name="created_date" class="form-control" placeholder="Created Date">
                                 </div>
                             </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-12">
+                                    <label class="form-label">Notes</label>
+                                    <textarea name="description" class="form-control" rows="10" cols="10">
+
+                                    </textarea>
+                                </div>
+                                </div>
                             <div class="text-center mt-3">
-                                <button name="add_cus" type="submit" class="btn btn-success">Add Customer</button>
-                                <button type="reset" class="btn btn-danger">Cancel</button>
+                                <button name="add_item" type="submit" class="btn btn-success rounded-5">Add Product</button>
+                                <button type="reset" class="btn btn-danger rounded-5">Cancel</button>
                             </div>
                         </form>
                     </div>
@@ -135,28 +144,102 @@ require_once 'inc/html_head.php';
                         <div class="text-center">
                             <h5>Create Brand and Category</h5>
                         </div>
+                        <?php
+                            if (isset($_POST['create_brand'])) {
+                                $brand_name = $_POST['brand_name'];
+
+                                if (empty($brand_name)) {
+                                    echo '
+                                    <div class="alert alert-warning alert-dismissible fade show">
+                                        <strong>Message!</strong> Please input a correct data.
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    </div>
+                                ';
+                                } else {
+
+                                    $sql = $con->prepare("INSERT INTO tbl_brand(brand_name) VALUES(?)");
+                                    $sql->bindParam(1, $brand_name);
+
+                                    if ($sql->execute()) {
+                                        echo '
+                                        <div class="alert alert-success alert-dismissible fade show">
+                                            <strong>Message!</strong> Insert Brand Name Success.
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                        </div>
+                                    ';
+                                    } else {
+                                        echo '
+                                        <div class="alert alert-danger alert-dismissible fade show">
+                                            <strong>Message!</strong> Error Insert Data, Some data is already exist.
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                        </div>
+                                    ';
+                                    }
+                                }
+                            }
+                            ?>
+                            <?php
+                            if (isset($_POST['create_category'])) {
+                                $category_name = $_POST['category_name'];
+
+                                if (empty($category_name)) {
+                                    echo '
+                                    <div class="alert alert-warning alert-dismissible fade show">
+                                        <strong>Message!</strong> Please input a correct data.
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    </div>
+                                ';
+                                } else {
+
+                                    $sql = $con->prepare("INSERT INTO tbl_category(category_name) VALUES(?)");
+                                    $sql->bindParam(1, $category_name);
+
+                                    if ($sql->execute()) {
+                                        echo '
+                                        <div class="alert alert-success alert-dismissible fade show">
+                                            <strong>Message!</strong> Insert Category Name Success.
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                        </div>
+                                    ';
+                                    } else {
+                                        echo '
+                                        <div class="alert alert-danger alert-dismissible fade show">
+                                            <strong>Message!</strong> Error Insert Data, Some data is already exist.
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                        </div>
+                                    ';
+                                    }
+                                }
+                            }
+                            ?>
                         <form action="#" method="post">
                         <div class="row  text-center">
                             <div class="col-md-6 mb-3 mt-3">
-                                <input type="text" name="brand_create" class="form-control" placeholder="Create Brand">
+                                <input type="text" name="brand_name" class="form-control" placeholder="Create Brand">
                                 <div class="mt-2">
-                                <a type="submit" name="create_brand">
-                                    <svg  width="20" height="20" fill="green" class="bi bi-plus-circle" viewBox="0 0 16 16">
+                                <button class="btn btn-success rounded-5" type="submit" name="create_brand">
+                                <a>
+                                    <svg  width="17" height="17" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
                                     <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
                                     <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
                                     </svg>
+                                    Add
                                 </a>
+                                </button>
                                 </div>
                             </div>
                             <div class="col-md-6 mb-3 mt-3">
-                                <input type="text" name="category_create" class="form-control" placeholder="Create Category">
+                                <input type="text" name="category_name" class="form-control" placeholder="Create Category">
                                 <div class="mt-2">
+                                <button class="btn btn-success rounded-5" type="submit" name="create_category">
                                 <a type="submit" name="create_category">
-                                    <svg  width="20" height="20" fill="green" class="bi bi-plus-circle" viewBox="0 0 16 16">
+                                    <svg  width="17" height="17" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
                                     <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
                                     <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
                                     </svg>
+                                    Add
                                 </a>
+                                </button>
                                 </div>
                             </div>
                         </div>

@@ -137,7 +137,7 @@ require_once 'inc/html_head.php';
                                 </div>
                             </div>
                             <div class="text-center mt-3">
-                                <button name="update_user" type="submit" class="btn btn-success">Update User</button>
+                                <button name="update_user" type="submit" class="btn btn-success rounded-5">Update</button>
                             </div>
                         </form>
                     </div>

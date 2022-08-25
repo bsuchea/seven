@@ -42,7 +42,7 @@ require_once 'inc/html_head.php';
 			';
             } else {
 
-                $sql = $con->prepare("INSERT INTO tbl_customer(customer_name, customer_gender, customer_email, customer_phone, customer_address, status) VALUES(?, ?, ?, ?, ?, ?)");
+                $sql = $con->prepare("INSERT INTO tbl_suppliers(suppliers_name, suppliers_gender, suppliers_email, suppliers_phone, suppliers_address, status) VALUES(?, ?, ?, ?, ?, ?)");
                 $sql->bindParam(1, $name);
                 $sql->bindParam(2, $gender);
                 $sql->bindParam(3, $email);
@@ -119,8 +119,8 @@ require_once 'inc/html_head.php';
                                 </div>
                             </div>
                             <div class="text-center mt-3">
-                                <button name="add_cus" type="submit" class="btn btn-success">Add Customer</button>
-                                <button type="reset" class="btn btn-danger">Cancel</button>
+                                <button name="add_cus" type="submit" class="btn btn-success rounded-5">Add Supplier</button>
+                                <button type="reset" class="btn btn-danger rounded-5">Cancel</button>
                             </div>
                         </form>
                         </div>

@@ -38,7 +38,7 @@
     <?php
     }else if($row_select_logedin['permission'] == "User"){
         ?>
-        <div class="alert alert-secondary" role="alert">
+        <div class="alert alert-secondary" style="height: 75px;" role="alert">
             <div class="row">
                 <div>
                     <a href="Users.php?ID=<?= $row_select_logedin['user_id'] ?>">

@@ -141,8 +141,8 @@ require_once 'inc/html_head.php';
                                 </div>
                             </div>
                             <div class="text-center mt-3">
-                                <button name="add_user" type="submit" class="btn btn-success">Add User</button>
-                                <button type="reset" class="btn btn-danger">Cancel</button>
+                                <button name="add_user" type="submit" class="btn btn-success rounded-5">Add User</button>
+                                <button type="reset" class="btn btn-danger rounded-5">Cancel</button>
                             </div>
                         </form>
                     </div>

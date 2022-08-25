@@ -23,20 +23,17 @@ require_once 'inc/html_head.php';
 
         if (isset($_POST['add_salary'])) {
             $vendor_name = $_POST['vendor_name'];
-            $vendor_gender = $_POST['vendor_gender'];
-            $vendor_phone = $_POST['vendor_phone'];
-            $vendor_email = $_POST['vendor_email'];
-            $vendor_address = $_POST['vendor_address'];
             $salary = $_POST['salary'];
             $bonus = $_POST['bonus'];
             $salary_date = $_POST['salary_date'];
+            $notes = $_POST['notes'];
 
             //  date_default_timezone_set('Asia/Bangkok');
             // $created_date = date('d-m-Y h:i:s a', time());
             // $updated_date = date('Y/m/d h:i:s a', time());
             // $status = 1;
 
-            if (empty($vendor_name) || empty($vendor_gender) || empty($salary_date) || empty($salary) || empty($vendor_email) || empty($vendor_phone) || empty($vendor_address)){
+            if (empty($vendor_name) || empty($notes) || empty($salary)){
                 echo '
 				<div class="alert alert-warning alert-dismissible fade show">
 					<strong>Message!</strong> Please input a correct data.
@@ -45,20 +42,17 @@ require_once 'inc/html_head.php';
 			';
             } else {
 
-                $sql = $con->prepare("INSERT INTO tbl_salary(vendor_name, vendor_gender, vendor_phone, vendor_email, vendor_address, salary, bonus, salary_date) VALUES(?, ?, ?, ?, ?, ?, ?, ?)");
+                $sql = $con->prepare("INSERT INTO tbl_salary(user_id, salary, bonus, salary_date, notes) VALUES(?, ?, ?, ?, ?)");
                 $sql->bindParam(1, $vendor_name);
-                $sql->bindParam(2, $vendor_gender);
-                $sql->bindParam(3, $vendor_phone);
-                $sql->bindParam(4, $vendor_email);
-                $sql->bindParam(5, $vendor_address);
-                $sql->bindParam(6, $salary);
-                $sql->bindParam(7, $bonus);
-                $sql->bindParam(8, $salary_date);
+                $sql->bindParam(2, $salary);
+                $sql->bindParam(3, $bonus);
+                $sql->bindParam(4, $salary_date);
+                $sql->bindParam(5, $notes);
 
                 if ($sql->execute()) {
                     echo '
 					<div class="alert alert-success alert-dismissible fade show">
-						<strong>Message!</strong> Insert Data success. Now you can back.
+						<strong>Message!</strong> Insert Data success.
 						<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 					</div>
 				';
@@ -88,9 +82,9 @@ require_once 'inc/html_head.php';
                                     <label for="form-select" class="form-label" >Vendor Name</label>
                                     <select name="vendor_name" class="form-select" required>
                                         <option hidden value="">Select Vendor</option>
-                                        <option value="Ses Sovankiri">Ses Sovankiri</option>
-                                        <option value="Siv Sovathanak">Siv Sovathanak</option>
-                                        <option value="Long Pheak">Long Pheak</option>
+                                        <option value="2"<? ?>>2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
                                     </select>
                                 </div>
                                 <div class="form-group col-md-6">
@@ -110,9 +104,9 @@ require_once 'inc/html_head.php';
                                 </div>
                                 </div>
                                 <div class="form-row">
-                                <div class="form-group col-md-6">
+                                <div class="form-group col-md-12">
                                     <label class="form-label">Notes</label>
-                                    <textarea class="form-control" rows="10" cols="10">
+                                    <textarea name="notes" class="form-control" rows="10" cols="10">
 
                                     </textarea>
                                 </div>
