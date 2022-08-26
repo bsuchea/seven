@@ -75,7 +75,7 @@ require_once 'inc/html_head.php';
                 <div class="row g-2 justify-content-between mb-3">
                     <div class="col-auto ">
                         <h1 style="font-family: 'Kh Dangrek'; color:#15a362; font-size:large"
-                            class="app-page-title mb-2">ទំព័របញ្ចូលទំនិញ</h1>
+                            class="app-page-title mb-2">ទំព័រទិញទំនិញ</h1>
                     </div>
                     <div class="container bg-white p-3 mt-3 shadow p-3 mb-5 bg-body rounded-4">
                         <form action="#" method="post">
@@ -127,134 +127,36 @@ require_once 'inc/html_head.php';
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-12">
-                                    <label class="form-label">Notes</label>
+                                    <label class="form-label">Description</label>
                                     <textarea name="description" class="form-control" rows="10" cols="10">
 
                                     </textarea>
                                 </div>
                                 </div>
                             <div class="text-center mt-3">
-                                <button name="add_item" type="submit" class="btn btn-success rounded-5">Add Product</button>
-                                <button type="reset" class="btn btn-danger rounded-5">Cancel</button>
+                                <button name="add_item" type="submit" class="btn btn-sm btn-success rounded-5">
+                                    <svg width="16" height="16" fill="currentColor" class="bi bi-check-circle" viewBox="0 0 16 16">
+                                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                    <path d="M10.97 4.97a.235.235 0 0 0-.02.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05z"/>
+                                    </svg> Add Product</button>
+                                <button type="reset" class="btn btn-sm btn-danger rounded-5">
+                                    <svg width="16" height="16" fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16">
+                                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                    <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                                    </svg> Cancel</button>
                             </div>
                         </form>
                     </div>
-                    <!-- Create Brand and Category -->
-                    <div class="container bg-white shadow p-3 mb-3 bg-body rounded-4">
-                        <div class="text-center">
-                            <h5>Create Brand and Category</h5>
-                        </div>
-                        <?php
-                            if (isset($_POST['create_brand'])) {
-                                $brand_name = $_POST['brand_name'];
-
-                                if (empty($brand_name)) {
-                                    echo '
-                                    <div class="alert alert-warning alert-dismissible fade show">
-                                        <strong>Message!</strong> Please input a correct data.
-                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                                    </div>
-                                ';
-                                } else {
-
-                                    $sql = $con->prepare("INSERT INTO tbl_brand(brand_name) VALUES(?)");
-                                    $sql->bindParam(1, $brand_name);
-
-                                    if ($sql->execute()) {
-                                        echo '
-                                        <div class="alert alert-success alert-dismissible fade show">
-                                            <strong>Message!</strong> Insert Brand Name Success.
-                                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                                        </div>
-                                    ';
-                                    } else {
-                                        echo '
-                                        <div class="alert alert-danger alert-dismissible fade show">
-                                            <strong>Message!</strong> Error Insert Data, Some data is already exist.
-                                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                                        </div>
-                                    ';
-                                    }
-                                }
-                            }
-                            ?>
-                            <?php
-                            if (isset($_POST['create_category'])) {
-                                $category_name = $_POST['category_name'];
-
-                                if (empty($category_name)) {
-                                    echo '
-                                    <div class="alert alert-warning alert-dismissible fade show">
-                                        <strong>Message!</strong> Please input a correct data.
-                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                                    </div>
-                                ';
-                                } else {
-
-                                    $sql = $con->prepare("INSERT INTO tbl_category(category_name) VALUES(?)");
-                                    $sql->bindParam(1, $category_name);
-
-                                    if ($sql->execute()) {
-                                        echo '
-                                        <div class="alert alert-success alert-dismissible fade show">
-                                            <strong>Message!</strong> Insert Category Name Success.
-                                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                                        </div>
-                                    ';
-                                    } else {
-                                        echo '
-                                        <div class="alert alert-danger alert-dismissible fade show">
-                                            <strong>Message!</strong> Error Insert Data, Some data is already exist.
-                                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                                        </div>
-                                    ';
-                                    }
-                                }
-                            }
-                            ?>
-                        <form action="#" method="post">
-                        <div class="row  text-center">
-                            <div class="col-md-6 mb-3 mt-3">
-                                <input type="text" name="brand_name" class="form-control" placeholder="Create Brand">
-                                <div class="mt-2">
-                                <button class="btn btn-success rounded-5" type="submit" name="create_brand">
-                                <a>
-                                    <svg  width="17" height="17" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
-                                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-                                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
-                                    </svg>
-                                    Add
-                                </a>
-                                </button>
-                                </div>
-                            </div>
-                            <div class="col-md-6 mb-3 mt-3">
-                                <input type="text" name="category_name" class="form-control" placeholder="Create Category">
-                                <div class="mt-2">
-                                <button class="btn btn-success rounded-5" type="submit" name="create_category">
-                                <a type="submit" name="create_category">
-                                    <svg  width="17" height="17" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
-                                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-                                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
-                                    </svg>
-                                    Add
-                                </a>
-                                </button>
-                                </div>
-                            </div>
-                        </div>
-                        </form>
                     </div>
                 </div>
             </div>
         </div><!--//container-fluid-->
+        <footer id="footbarlog" class="app-footer">
+        <?php include('inc/footer.php') ?>
+        </footer><!--//app-footer-->
+
     </div><!--//app-content-->
 
-    <footer id="footbarlog" class="app-footer">
-        <?php include('inc/footer.php') ?>
-    </footer><!--//app-footer-->
-
-</div>
 
 <!-- ::: My Script ::: -->
 <?php include('contents/My_Scripts.php') ?>

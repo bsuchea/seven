@@ -78,6 +78,17 @@
                     </li>
 
                     <li class="nav-item">
+                        <a class="nav-link <?= ($p=="brand_and_category" || $p=="brand" || $p=="brand_create" || $p=="brand_edit" || $p=="category" || $p=="category_create" || $p=="category_edit" )?'active':'' ?>" href="brand_and_category.php">
+						        <span class="nav-icon">
+						            <svg width="16" height="16" fill="currentColor" class="bi bi-diagram-3" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M6 3.5A1.5 1.5 0 0 1 7.5 2h1A1.5 1.5 0 0 1 10 3.5v1A1.5 1.5 0 0 1 8.5 6v1H14a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-1 0V8h-5v.5a.5.5 0 0 1-1 0V8h-5v.5a.5.5 0 0 1-1 0v-1A.5.5 0 0 1 2 7h5.5V6A1.5 1.5 0 0 1 6 4.5v-1zM8.5 5a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1zM0 11.5A1.5 1.5 0 0 1 1.5 10h1A1.5 1.5 0 0 1 4 11.5v1A1.5 1.5 0 0 1 2.5 14h-1A1.5 1.5 0 0 1 0 12.5v-1zm1.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1zm4.5.5A1.5 1.5 0 0 1 7.5 10h1a1.5 1.5 0 0 1 1.5 1.5v1A1.5 1.5 0 0 1 8.5 14h-1A1.5 1.5 0 0 1 6 12.5v-1zm1.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1zm4.5.5a1.5 1.5 0 0 1 1.5-1.5h1a1.5 1.5 0 0 1 1.5 1.5v1a1.5 1.5 0 0 1-1.5 1.5h-1a1.5 1.5 0 0 1-1.5-1.5v-1zm1.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1z"/>
+                                    </svg>
+						        </span>
+                            <span class="nav-link-text">Brand and Category</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
                         <a class="nav-link <?= ($p=="suppliers" || $p=="supplier_create" || $p=="supplier_edit")?'active':'' ?>" href="suppliers.php">
 						        <span class="nav-icon">
 						        	<svg width="16" height="16" fill="currentColor" class="bi bi-people"
@@ -88,6 +99,24 @@
                         </a>
                     </li>
 
+                    <!-- Check Permission -->
+                    <?php
+                    $LogID = $_SESSION["Loged_id"];
+                    $status = 1;
+                
+                    //Sql Select User Logedin
+                    $sql_select_logedin = $con->prepare("SELECT * FROM tbl_user WHERE tbl_user.status = ? 
+                    AND tbl_user.user_id = ?");
+                
+                    $sql_select_logedin->bindParam(1, $status);
+                    $sql_select_logedin->bindParam(2, $LogID);
+                
+                    $sql_select_logedin->execute();
+                    $row_select_logedin = $sql_select_logedin->fetch(PDO::FETCH_BOTH);
+                
+                    $_SESSION['Loged_permission'] = $row_select_logedin['permission'];
+                    if ($row_select_logedin['permission'] == "Admin") {
+                    ?>
                     <li class="nav-item">
                         <a class="nav-link <?= ($p=="salary")?'active':'' ?>"" href="salary.php">
 						        <span class="nav-icon">
@@ -98,6 +127,9 @@
                             <span class="nav-link-text">Salary</span>
                         </a>
                     </li>
+                    <?php } ?>
+                    <!-- End Check Permission -->
+
                     <li class="nav-item">
                         <a class="nav-link <?= ($p=="reports")?'active':'' ?>" href="reports.php">
 						        <span class="nav-icon">

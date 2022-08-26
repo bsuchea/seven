@@ -28,18 +28,15 @@ require_once 'inc/html_head.php';
                 <div class="row g-2 justify-content-between mb-1">
                     <div class="col-auto">
                         <h1 style="font-family: 'Kh Dangrek'; color:#15a362; font-size:large"
-                            class="app-page-title mb-2">ទំព័ររបាយការណ៍</h1>
+                            class="app-page-title mb-2">ទំព័រយីហោ និងប្រភេទទំនិញ</h1>
                     </div>
                     <div class="container bg-white p-3 mt-3 shadow p-3 mb-5 bg-body rounded-5 border border-success">
                     <div class="row text-center">
                         <div style="background-color:#15a362 ;" class="col border rounded-5 ml-2 p-2">
-                            <a style="text-decoration: none; color:white;" href="sale_report.php"><strong>Sale Report</strong></a>
+                            <a style="text-decoration: none; color:white;" href="brand.php"><strong>Brand</strong></a>
                         </div>
                         <div style="background-color:#15a362 ;" class="col border rounded-5 ml-2 mr-2 p-2">
-                            <a style="text-decoration: none; color:white;" href="purchase_report.php"><strong>Purchase Report</strong></a>
-                        </div>
-                        <div style="background-color:#15a362 ;" class="col border rounded-5 mr-2 p-2">
-                            <a style="text-decoration: none; color:white;" href="salary_report.php"><strong>Salary Report</strong></a>
+                            <a style="text-decoration: none; color:white;" href="category.php"><strong>Category</strong></a>
                         </div>
                     </div>
                     </div>
