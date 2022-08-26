@@ -22,16 +22,13 @@ require_once 'inc/html_head.php';
         <?php
 
         if (isset($_POST['add_sale'])) {
-            $item_name = $_POST['item_name'];
             $buyer_name = $_POST['buyer_name'];
             $buyer_phone = $_POST['buyer_phone'];
+            $item_name = $_POST['item_name'];
             $sale_qty = $_POST['sale_qty'];
-            $sale_cost = $_POST['sale_cost'];
             $sale_date = $_POST['sale_date'];
-            $description = $_POST['description'];
-            
 
-            if (empty($item_name) || empty($buyer_name) || empty($buyer_phone) || empty($sale_qty) || empty($sale_cost) || empty($sale_date)) {
+            if (empty($buyer_name) || ($buyer_phone) || empty($item_name) ||  empty($sale_qty) || empty($sale_date)) {
                 echo '
 				<div class="alert alert-warning alert-dismissible fade show">
 					<strong>Message!</strong> Please input a correct data.
@@ -40,20 +37,18 @@ require_once 'inc/html_head.php';
 			';
             } else {
 
-                $sql = $con->prepare("INSERT INTO tbl_sale(item_id, buyer_name, buyer_phone, sale_qty, sale_cost, sale_date, description) 
-                                    VALUES(?, ?, ?, ?, ?, ?, ?)");
-                $sql->bindParam(1, $item_name);
-                $sql->bindParam(2, $buyer_name);
-                $sql->bindParam(3, $buyer_phone);
+                $sql = $con->prepare("INSERT INTO tbl_sale(buyer_name, buyer_phone, item_name, sale_qty, sale_date) 
+                                    VALUES(?, ?, ?, ?, ?)");
+                $sql->bindParam(1, $buyer_name);
+                $sql->bindParam(2, $buyer_phone);
+                $sql->bindParam(3, $item_name);
                 $sql->bindParam(4, $sale_qty);
-                $sql->bindParam(5, $sale_cost);
-                $sql->bindParam(6, $sale_date);
-                $sql->bindParam(7, $description);
+                $sql->bindParam(5, $sale_date);
 
                 if ($sql->execute()) {
                     echo '
 					<div class="alert alert-success alert-dismissible fade show">
-						<strong>Message!</strong> Insert Sale Success.
+						<strong>Message!</strong> Insert Purchase Success.
 						<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 					</div>
 				';
@@ -78,6 +73,20 @@ require_once 'inc/html_head.php';
                     </div>
                     <div class="container bg-white p-3 mt-3 shadow p-3 mb-5 bg-body rounded-4">
                         <form action="#" method="post">
+                        <div class="form-row">
+                                <div class="form-group col-md-4">
+                                <label for="form-select" class="form-label">Buyer Name</label>
+                                    <input type="text" name="buyer_name" class="form-control" placeholder="Buyer Name">
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="form-select" class="form-label">Buyer Phone</label>
+                                    <input type="number" name="buyer_phone" class="form-control" placeholder="Buyer Phone">
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="form-select" class="form-label">Sale Date</label>
+                                    <input type="date" name="sale_date" class="form-control">
+                                </div>
+                            </div>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="inputID">Product Name</label>
@@ -90,53 +99,61 @@ require_once 'inc/html_head.php';
                                     </select>
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label class="form-label">Quantity</label>
+                                    <label for="form-select" class="form-label">Quantity</label>
                                     <input type="number" name="sale_qty" class="form-control" placeholder="Quantity">
                                 </div>
-                                </div>
-                                <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <label for="form-select" class="form-label">Buyer Name</label>
-                                    <input type="text" name="buyer_name" class="form-control" placeholder="Buyer Name">
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label for="form-select" class="form-label">Buyer Phone</label>
-                                    <input type="text" name="buyer_phone" class="form-control" placeholder="Buyer Phone">
-                                </div>
-                                </div>
-                            
-                            <div class="form-row">
-                            
-                                <div class="form-group col-md-6">
-                                    <label class="form-label">Sale Total ($)</label>
-                                    <input type="text" name="sale_cost" class="form-control" placeholder="Sale Total">
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label class="form-label">Sale Date</label>
-                                    <input type="date" name="sale_date" class="form-control" placeholder="Sale Date">
+                            </div>
+                            <div class="text-center mt-3">
+                                <button name="#" type="submit" class="btn btn-sm btn-info rounded-5">
+                                <svg width="16" height="16" fill="white" class="bi bi-plus-circle" viewBox="0 0 16 16">
+                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                                </svg> Add</button>
+                            </div>
+                        </form>
+                    </div>
+                       
+                    <!-- Table -->
+                    <div class="container p-3 mt-3 shadow p-3 mb-5 rounded-4">
+                    <div class="tab-content" id="orders-table-tab-content">
+                    <div class="tab-pane fade show active" id="orders-all" role="tabpanel" aria-labelledby="orders-all-tab">
+                        <div class="app-card app-card-orders-table shadow-sm mb-5 mt-1">
+                            <div class="app-card-body">
+                                <div class="table-responsive">
+                                    <table class="table app-table-hover mb-0 text-left">
+                                        <thead>
+                                            <tr>
+                                                <th class="cell text-center">#</th>
+                                                <th class="cell">Product Name</th>
+                                                <th class="cell">Quantity</th>
+                                                <th class="cell">Buyer Name</th>
+                                                <th class="cell">Buyer Phone</th>
+                                                <th class="cell">Amount($)</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
-                            <div class="form-row">
-                                <div class="form-group col-md-12">
-                                    <label class="form-label">Description</label>
-                                    <textarea name="description" class="form-control" rows="10" cols="10">
-
-                                    </textarea>
-                                </div>
-                                </div>
-                            <div class="text-center mt-3">
-                                <button name="add_sale" type="submit" class="btn btn-sm btn-success rounded-5">
+                        </div>
+                    </div>
+                    </div> 
+                    </div><!--end table-->
+                    <!-- Total -->
+                    <div style="width: 20%;" class="container bg-white p-3 shadow rounded-4 mr-5">
+                        <h6>Sale Total ($): </h6>
+                    </div>
+                    <!-- End Total -->
+                    <div class="text-center mt-3">
+                                <button name="#" type="submit" class="btn btn-md btn-success rounded-5">
                                     <svg width="16" height="16" fill="currentColor" class="bi bi-check-circle" viewBox="0 0 16 16">
                                     <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
                                     <path d="M10.97 4.97a.235.235 0 0 0-.02.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05z"/>
                                     </svg> Sale</button>
-                                <button type="reset" class="btn btn-sm btn-danger rounded-5">
-                                    <svg width="16" height="16" fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16">
-                                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-                                    <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
-                                    </svg> Cancel</button>
-                            </div>
-                        </form>
                     </div>
                     </div>
                 </div>

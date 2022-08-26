@@ -63,8 +63,8 @@ require_once 'inc/html_head.php';
                                             <th class="cell">Stock</th>
                                             <th class="cell">Unit Price</th>
                                             <th class="cell">Created Date</th>
-                                            <th class="cell">Description</th>
-                                            <th></th>
+                                            <th class="cell text-center">Description</th>
+                                            <th class="cell text-center">Action</th>
                                         </tr>
                                         </thead>
 
@@ -133,8 +133,8 @@ require_once 'inc/html_head.php';
                                             <th class="cell">Stock</th>
                                             <th class="cell">Unit Price</th>
                                             <th class="cell">Created Date</th>
-                                            <th class="cell">Description</th>
-                                            <th ></th>
+                                            <th class="cell text-center">Description</th>
+                                            <th class="cell text-center">Action</th>
                                         </tr>
                                         </tfoot>
                                     </table>
