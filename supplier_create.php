@@ -90,11 +90,11 @@ require_once 'inc/html_head.php';
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="inputID">Full Name</label>
-                                    <input name="name" class="form-control" type="text" placeholder="Full Name">
+                                    <input name="name" class="form-control" type="text" placeholder="Full Name" required>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="form-select" class="form-label">Gender</label>
-                                    <select name="gender" class="form-select">
+                                    <select name="gender" class="form-select" required>
                                         <option hidden value="">Select Gender</option>
                                         <option value="Male">Male</option>
                                         <option value="Female">Female</option>
@@ -104,18 +104,18 @@ require_once 'inc/html_head.php';
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label class="form-label">Email</label>
-                                    <input type="email" name="email" class="form-control" placeholder="Email">
+                                    <input type="email" name="email" class="form-control" placeholder="Email" required>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label class="form-label">Phone Number</label>
-                                    <input type="text" name="phone" class="form-control" placeholder="Phone Number">
+                                    <input type="text" name="phone" class="form-control" placeholder="Phone Number" required>
                                 </div>
                             </div>
 
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label class="form-label">Address</label>
-                                    <input type="text" name="address" class="form-control" placeholder="Address">
+                                    <input type="text" name="address" class="form-control" placeholder="Address" required>
                                 </div>
                             </div>
                             <div class="text-center mt-3">

@@ -96,15 +96,15 @@ require_once 'inc/html_head.php';
                             <div class="form-row">
                                 <div class="form-group col-md-4">
                                     <label for="inputID">Full Name</label>
-                                    <input name="fullname" class="form-control" type="text" placeholder="Full Name">
+                                    <input name="fullname" class="form-control" type="text" placeholder="Full Name" required>
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label for="inputID">Username</label>
-                                    <input name="name" class="form-control" type="text" placeholder="Username">
+                                    <input name="name" class="form-control" type="text" placeholder="Username" required>
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label for="form-select" class="form-label">Gender</label>
-                                    <select name="gender" class="form-select">
+                                    <select name="gender" class="form-select" required>
                                         <option hidden value="">Select Gender</option>
                                         <option value="Male">Male</option>
                                         <option value="Female">Female</option>
@@ -114,11 +114,11 @@ require_once 'inc/html_head.php';
                             <div class="form-row">
                                 <div class="form-group col-md-4">
                                     <label class="form-label">Email</label>
-                                    <input type="email" name="email" class="form-control" placeholder="Email">
+                                    <input type="email" name="email" class="form-control" placeholder="Email" required>
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label class="form-label">Phone Number</label>
-                                    <input type="text" name="phone" class="form-control" placeholder="Phone Number">
+                                    <input type="text" name="phone" class="form-control" placeholder="Phone Number" required>
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label class="form-label">Address</label>
@@ -129,7 +129,7 @@ require_once 'inc/html_head.php';
                             <div class="form-row">
                             <div class="form-group col-md-6">
                             <label for="form-select" class="form-label">Permission</label>
-                                    <select name="permission" class="form-select">
+                                    <select name="permission" class="form-select" required>
                                         <option hidden value="">Set Permission</option>
                                         <option value="Admin">Admin</option>
                                         <option value="User">User</option>
@@ -137,7 +137,7 @@ require_once 'inc/html_head.php';
                             </div>
                             <div class="form-group col-md-6">
                                     <label class="form-label">Password</label>
-                                    <input type="password" name="password" class="form-control" placeholder="Password">
+                                    <input type="password" name="password" class="form-control" placeholder="Password" required>
                                 </div>
                             </div>
                             <div class="text-center mt-3">

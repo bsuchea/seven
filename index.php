@@ -123,25 +123,17 @@ include_once ("config/db.php");
 								<span class="btn-show-pass">
 									<i class="zmdi zmdi-eye"></i>
 								</span>
-								<div class="extra mt-3 row justify-content-between">
-									<div class="col-6">
-										<div class="form-check">
-											<input class="form-check-input" type="checkbox" value="" id="RememberPassword">
-											<label class="form-check-label" for="RememberPassword">
-											Remember me
-											</label>
-										</div>
-									</div><!--//col-6-->
-									<div class="col-6">
-										<div class="forgot-password text-end">
-											<a href="change_password.php">Change password?</a>
-										</div>
-									</div><!--//col-6-->
-								</div><!--//extra-->
 							</div><!--//form-group-->
 							<div class="text-center">
 								<button type="submit" name="submit" class="btn app-btn-primary w-100 theme-btn mx-auto">Log In</button>
 							</div>
+							<div class="extra mt-3 row justify-content-between">
+									<div class="col-12">
+										<div class="forgot-password text-center">
+											<a href="change_password.php">Change password?</a>
+										</div>
+									</div><!--//col-6-->
+								</div><!--//extra-->
 						</form>
 					</div><!--//auth-form-container-->	
 
@@ -150,7 +142,7 @@ include_once ("config/db.php");
 			    <footer id="footertext" class="app-auth-footer">
 				    <div class="container text-center py-3">
 				         <!--/* This template is free as long as you keep the footer attribution link. If you'd like to use the template without the attribution link, you can buy the commercial license via our website: themes.3rdwavemedia.com Thank you for your support. :) */-->
-			        <small class="copyright">បង្កើតដោយ៖ ក្រុមនិស្សិត ស.ជ.ប.ដ <i class="fas fa-heart" style="color: #fb866a;"></i></small>
+			        <small class="copyright">បង្កើតដោយ៖ ក្រុមនិស្សិតសាកលវិទ្យាល័យជាតិបាត់ដំបង​ ជំនាន់ទី​ ១៥ <i class="fas fa-heart" style="color: #fb866a;"></i></small>
 				       
 				    </div>
 			    </footer><!--//app-auth-footer-->	

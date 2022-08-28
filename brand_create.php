@@ -79,7 +79,7 @@ require_once 'inc/html_head.php';
                         <div class="row  text-center">
                             <div class="col-md-6 mb-3 mt-3">
                                 <label class="form-label">Brand Name</label>
-                                <input type="text" name="brand_name" class="form-control" placeholder="Brand Name">
+                                <input type="text" name="brand_name" class="form-control" placeholder="Brand Name" required>
                             </div>
                             <div class="col-md-6 mb-3 mt-3">
                                 <label class="form-label">Description or Notes</label>
