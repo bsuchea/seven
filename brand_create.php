@@ -87,7 +87,7 @@ require_once 'inc/html_head.php';
                             </div>
                         </div>
                         <div class="mt-2 text-center">
-                                <button class="btn btn-success rounded-5" type="submit" name="create_brand">
+                                <button class="btn btn-sm btn-success rounded-5" type="submit" name="create_brand">
                                 <a>
                                     <svg width="16" height="16" fill="currentColor" class="bi bi-check2-circle" viewBox="0 0 16 16">
                                     <path d="M2.5 8a5.5 5.5 0 0 1 8.25-4.764.5.5 0 0 0 .5-.866A6.5 6.5 0 1 0 14.5 8a.5.5 0 0 0-1 0 5.5 5.5 0 1 1-11 0z"/>

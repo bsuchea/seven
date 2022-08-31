@@ -131,7 +131,7 @@
                     <!-- End Check Permission -->
 
                     <li class="nav-item">
-                        <a class="nav-link <?= ($p=="reports")?'active':'' ?>" href="reports.php">
+                        <a class="nav-link <?= ($p=="reports" || $p=="sale_report" || $p=="purchase_report")?'active':'' ?>" href="reports.php">
 						        <span class="nav-icon">
 						        	<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-files"
                                          fill="currentColor" >
