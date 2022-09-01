@@ -29,41 +29,15 @@ require_once 'inc/html_head.php';
             $purchase_total = $_POST['purchase_total'];
             $purchase_date = $_POST['purchase_date'];
 
-            if (empty($item_name) || $suppliers_name || empty($purchase_qty) || empty($purchase_total) || empty($purchase_date)) {
-                echo '
-				<div class="alert alert-warning alert-dismissible fade show">
-					<strong>Message!</strong> Please input a correct data.
-					<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-				</div>
-			';
-            } else {
-
-                $sql = $con->prepare("INSERT INTO tbl_purchase(item_id, suppliers_name, purchase_qty, purchase_amount, purchase_total, purchase_date) 
+            $sql = $con->prepare("INSERT INTO tbl_purchase(item_id, suppliers_name, purchase_qty, purchase_amount, purchase_total, purchase_date) 
                                     VALUES(?, ?, ?, ?, ?, ?)");
-                $sql->bindParam(1, $item_name);
-                $sql->bindParam(2, $suppliers_name);
-                $sql->bindParam(3, $purchase_qty);
-                $sql->bindParam(4, $purchase_amount);
-                $sql->bindParam(5, $purchase_total);
-                $sql->bindParam(6, $purchase_date);
-
-                if ($sql->execute()) {
-                    echo '
-					<div class="alert alert-success alert-dismissible fade show">
-						<strong>Message!</strong> Insert Purchase Success.
-						<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-					</div>
-				';
-                } else {
-                    echo '
-					<div class="alert alert-danger alert-dismissible fade show">
-						<strong>Message!</strong> Error Insert Data, Some data is already exist.
-						<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-					</div>
-				';
-                }
+            $sql->bindParam(1, $item_name);
+            $sql->bindParam(2, $suppliers_name);
+            $sql->bindParam(3, $purchase_qty);
+            $sql->bindParam(4, $purchase_amount);
+            $sql->bindParam(5, $purchase_total);
+            $sql->bindParam(6, $purchase_date);
             }
-        }
         ?>
         <?php if(isset($_SESSION['res'])){ echo $_SESSION['res']; unset($_SESSION['res']);}  ?>
         <div class="container-xl">
@@ -91,7 +65,7 @@ require_once 'inc/html_head.php';
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="form-select" class="form-label">Purchase Date</label>
-                                    <input type="date" name="purchase_date" id="purchase_date" class="form-control" placeholder="Quantity">
+                                    <input type="date" name="purchase_date" id="purchase_date" class="form-control">
                                 </div>
                             </div>
                                 <div class="form-row">
@@ -137,8 +111,8 @@ require_once 'inc/html_head.php';
                                         <thead>
                                             <tr>
                                                 <th class="cell">Product Name</th>
-                                                <th class="cell">Unit Price ($)</th>
                                                 <th class="cell">Quantity</th>
+                                                <th class="cell">Unit Price ($)</th>
                                                 <th class="cell">Amount ($)</th>
                                             </tr>
                                         </thead>
@@ -156,15 +130,15 @@ require_once 'inc/html_head.php';
                     </div><!--end table-->
                     <!-- Total -->
                     <div style="width: 20%;" class="container bg-white p-3 shadow rounded-4 mr-5">
-                        <h6>Purchase Total ($): <span id="total"></span></h6>
+                        <h6>Purchase Total ($): <span id="total"></span>$</h6>
                     </div>
                     <!-- End Total -->
                     <div class="text-center mt-3">
-                                <button name="#" id="btnPurchase" type="submit" class="btn btn-md btn-success rounded-5">
-                                    <svg width="16" height="16" fill="currentColor" class="bi bi-check-circle" viewBox="0 0 16 16">
-                                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-                                    <path d="M10.97 4.97a.235.235 0 0 0-.02.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05z"/>
-                                    </svg> Purchase</button>
+                                    <button name="add_purchase" id="btnPurchase" type="submit" class="btn btn-md btn-success rounded-5">
+                                        <svg width="16" height="16" fill="currentColor" class="bi bi-check-circle" viewBox="0 0 16 16">
+                                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                        <path d="M10.97 4.97a.235.235 0 0 0-.02.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05z"/>
+                                        </svg> Purchase</button>
                     </div>
                     </div>
                 </div>
