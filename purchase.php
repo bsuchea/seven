@@ -163,9 +163,9 @@ require_once 'inc/html_head.php';
     });
 
     $("#btnAdd").click(function(){
-        if($('#item_name').val() == "") {errmsg('Please select item!'); return false;}
-        if($('#purchase_qty').val() == "") {errmsg('Please insert purchase quantity!'); return false; }
-        if($('#purchase_unit_price').val() == "") {errmsg('Please insert purchase unit price!'); return false;}
+        if($('#item_name').val() == "") {errmsg('Please select Item!'); return false;}
+        if($('#purchase_qty').val() == "") {errmsg('Please insert Purchase Quantity!'); return false; }
+        if($('#purchase_unit_price').val() == "") {errmsg('Please insert Purchase Unit Price!'); return false;}
 
         let newRowContent = "<td>"+$('#item_name option:selected').text() +"</td>" + "<td>"+$('#purchase_qty').val() +"</td>" + "<td>"+$('#purchase_unit_price').val() +"</td>" + "<td>"+$('#purchase_qty').val() * $('#purchase_unit_price').val() +"</td>";
 

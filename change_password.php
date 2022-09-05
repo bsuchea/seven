@@ -11,7 +11,7 @@ require_once 'inc/html_head.php';
 				    <div class="app-auth-branding mb-4"><a class="app-logo" href="index.php"><img class="logo-icon me-0 rounded-circle" src="assets/images/Logo.jpg" alt="logo"></a></div>
 					<h2 id="logtext" style="color:#15a362 ;" class="auth-heading text-center mb-4">ទំព័រផ្លាស់ប្តូរពាក្យសម្ងាត់</h2>
 
-					<div style="font-family:'Kh Dangrek';font-size: 13px;" class="auth-intro mb-4 text-center">សូមធ្វើការវាយបញ្ចូលពាក្យសម្ងាត់ចាស់ជាមុនសិន រួចធ្វើការបំពេញពាក្យសម្ងាត់ថ្មីនិង<p class="m-2">ធ្វើការចុចប៊ូតុង Reset Password ជាការស្រេច!!</p></div>
+					<div style="font-family:'Kh Dangrek';font-size: 13px;" class="auth-intro mb-4 text-center">សូមធ្វើការវាយបញ្ចូលពាក្យសម្ងាត់ចាស់ជាមុនសិន រួចធ្វើការបំពេញពាក្យសម្ងាត់ថ្មីនិង<p class="m-2">ធ្វើការចុចប៊ូតុង Change Password ជាការស្រេច!!</p></div>
 	
 					<div class="auth-form-container text-left">
 						
@@ -23,7 +23,7 @@ require_once 'inc/html_head.php';
 								<input id="change-password" name="change-password" type="password" class="form-control login-email mb-3" placeholder="Confirm Password" required="required">
 							</div><!--//form-group-->
 							<div class="text-center">
-								<button type="submit" class="btn btn-success app-btn-primary btn-block theme-btn col-5 mx-auto">Reset Password</button>
+								<button type="submit" class="btn btn-success app-btn-primary btn-block theme-btn col-5 mx-auto">Change Password</button>
 							</div>
 						</form>
 						
@@ -33,9 +33,13 @@ require_once 'inc/html_head.php';
 
 			    </div><!--//auth-body-->
 		    
-			    <footer id="footbarlog" class="app-footer">
-        			<?php include('inc/footer.php') ?>
-    			</footer><!--//app-footer-->	
+			    <footer id="footertext" class="app-auth-footer">
+				    <div class="container text-center py-3">
+				         <!--/* This template is free as long as you keep the footer attribution link. If you'd like to use the template without the attribution link, you can buy the commercial license via our website: themes.3rdwavemedia.com Thank you for your support. :) */-->
+			        <small class="copyright">បង្កើតដោយ៖ ក្រុមនិស្សិតសាកលវិទ្យាល័យជាតិបាត់ដំបង​ ជំនាន់ទី​ ១៥ <i class="fas fa-heart" style="color: #fb866a;"></i></small>
+				       
+				    </div>
+			    </footer><!--//app-auth-footer-->	
 		    </div><!--//flex-column-->   
 	    </div><!--//auth-main-col-->
 	    <div class="col-12 col-md-5 col-lg-6 h-100 auth-background-col">

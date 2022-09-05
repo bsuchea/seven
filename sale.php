@@ -155,19 +155,12 @@ require_once 'inc/html_head.php';
     $("#btnAdd").click(function(){
         if($('#buyer_name').val() == "") {errmsg('Please input Buyer Name!'); return false;}
         if($('#buyer_phone').val() == "") {errmsg('Please input Buyer Phone!'); return false;}
-        if($('#item_name').val() == "") {errmsg('Please select item!'); return false;}
-        if($('#sale_qty').val() == "") {errmsg('Please insert sale quantity!'); return false; }
+        if($('#item_name').val() == "") {errmsg('Please select Product!'); return false;}
+        if($('#sale_qty').val() == "") {errmsg('Please insert Sale Quantity!'); return false; }
 
         let newRowContent = "<td>"+$('#buyer_name').val() +"</td>" + "<td>"+$('#buyer_phone').val() +"</td>" + "<td>"+$('#item_name option:selected').text() +"</td>" + "<td>"+$('#sale_qty').val() +"</td>" + "<td>"+$('#sale_qty').val() * $('unitprice').val() +"</td>";
 
         $("#tblproduct tbody").append("<tr>"+newRowContent+"</tr>");
-
-        $(this).find(':selected').data('unitprice');
-        <select>
-            <option value="" data-unitprice="1">one</option>
-            <option value="" data-unitprice="2">two</option>
-            <option value="" data-unitprice="3">three</option>
-        </select>
 
         total += $('#sale_qty').val() * $('unitprice').val();
 
@@ -186,7 +179,7 @@ require_once 'inc/html_head.php';
         date = $("#purchase_date").val();
         $.ajax({
             // url: 'ajax/purchase.php?em='+em+'+date='+date,
-            url: 'ajax/purchase.php',
+            url: 'ajax/sale.php',
             cache: false,
             data: {items: items, em: em, d: date},
             success: function(res){

@@ -91,38 +91,45 @@ require_once 'inc/html_head.php';
                             <div class="form-row">
                                 <div class="form-group col-md-4">
                                     <label for="inputID">Product Name</label>
-                                    <input name="item_name" class="form-control" type="text" placeholder="Product Name">
+                                    <input name="item_name" class="form-control" type="text" placeholder="Product Name" required>
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label for="form-select" class="form-label">Brand</label>
                                     <select name="brand_name" class="form-select">
                                         <option hidden value="">Select Brand</option>
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
+                                        <?php 
+                                            $stmt = $con->query("SELECT * FROM tbl_brand");
+                                            while($row = $stmt->fetch(PDO::FETCH_OBJ)):
+                                        ?>
+                                        <option value="<?= $row->brand_id ?>"><?= $row->brand_name ?></option>
+                                        <?php endwhile; ?>
                                     </select>
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label for="form-select" class="form-label">Category</label>
                                     <select name="category" class="form-select">
                                         <option hidden value="">Select Category</option>
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
+                                        <?php 
+                                            $stmt = $con->query("SELECT * FROM tbl_category");
+                                            while($row = $stmt->fetch(PDO::FETCH_OBJ)):
+                                        ?>
+                                        <option value="<?= $row->category_id ?>"><?= $row->category_name ?></option>
+                                        <?php endwhile; ?>
                                     </select>
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-4">
                                     <label class="form-label">Quantity</label>
-                                    <input type="number" name="current_stock" class="form-control" placeholder="Quantity">
+                                    <input type="number" name="current_stock" class="form-control" placeholder="Quantity" required>
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label class="form-label">Unit Price</label>
-                                    <input type="text" name="unit_price" class="form-control" placeholder="Unit Price">
+                                    <input type="text" name="unit_price" class="form-control" placeholder="Unit Price" required>
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label class="form-label">Created Date</label>
-                                    <input type="date" name="created_date" class="form-control" placeholder="Created Date">
+                                    <input type="date" name="created_date" id="created_date" class="form-control" placeholder="Created Date">
                                 </div>
                             </div>
                             <div class="form-row">
@@ -159,6 +166,7 @@ require_once 'inc/html_head.php';
 
 
 <!-- ::: My Script ::: -->
+
 <?php include('contents/My_Scripts.php') ?>
 </body>
 </html>

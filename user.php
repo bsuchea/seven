@@ -104,14 +104,22 @@ require_once 'inc/html_head.php';
                                                         </span>
                                                         </td>
                                                     <?php 
-                                                        } else{
+                                                        } else if ($row->permission == "User"){
                                                     ?>
                                                         <td>
                                                         <span style="color:white ;" class="badge badge-pill badge-warning">
                                                                 <?= $row->permission ?>
                                                         </span>
                                                         </td>
-                                                    <?php } ?>
+                                                    <?php 
+                                                        } else {
+                                                    ?>
+                                                        <td>
+                                                        <span style="color:white ;" class="badge badge-pill badge-danger">
+                                                                <?= $row->permission ?>
+                                                        </span>
+                                                        </td>
+                                                    <?php } ?> 
                                                 <td class="td-actions text-center">
                                                     <a href="user_edit.php?id=<?= $row->user_id ?>" class="p-2">
                                                         <svg width="20" height="20" fill="currentColor"

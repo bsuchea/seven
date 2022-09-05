@@ -99,8 +99,12 @@ require_once 'inc/html_head.php';
                                 <div class="form-group col-md-6">
                                     <label for="form-select" class="form-label">Brand</label>
                                     <select name="brand" class="form-select">
-                                        <option value="MSI" <?= $data->brand_name=='MSI'?'selected':'' ?>>MSI</option>
-                                        <option value="TUF" <?= $data->brand_name=='TUF'?'selected':'' ?>>TUF</option>
+                                    <?php 
+                                            $stmt = $con->query("SELECT * FROM tbl_brand");
+                                            while($row = $stmt->fetch(PDO::FETCH_OBJ)):
+                                        ?>
+                                        <option value="<?= $row->brand_id ?>"><?= $row->brand_name ?></option>
+                                        <?php endwhile; ?>
                                     </select>
                                 </div>
                             </div>
@@ -108,8 +112,12 @@ require_once 'inc/html_head.php';
                                 <div class="form-group col-md-6">
                                 <label for="form-select" class="form-label">Category</label>
                                     <select name="category" class="form-select">
-                                        <option value="Mouse" <?= $data->category_name=='Mouse'?'selected':'' ?>>Mouse</option>
-                                        <option value="Monitor" <?= $data->category_name=='Monitor'?'selected':'' ?>>Monitor</option>
+                                    <?php 
+                                            $stmt = $con->query("SELECT * FROM tbl_category");
+                                            while($row = $stmt->fetch(PDO::FETCH_OBJ)):
+                                        ?>
+                                        <option value="<?= $row->category_id ?>"><?= $row->category_name ?></option>
+                                        <?php endwhile; ?>
                                     </select>
                                 </div>
                                 <div class="form-group col-md-6">
@@ -145,6 +153,15 @@ require_once 'inc/html_head.php';
 </div>
 
 <!-- ::: My Script ::: -->
+
+<script>
+    date_default_timezone_get();
+    $date = date('m/d/Y h:i:s a', time());
+    $(document).ready(function(){
+        $("#created_date") = $date;
+    });
+</script>
+
 <?php include('contents/My_Scripts.php') ?>
 </body>
 </html>

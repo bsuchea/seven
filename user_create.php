@@ -133,6 +133,7 @@ require_once 'inc/html_head.php';
                                         <option hidden value="">Set Permission</option>
                                         <option value="Admin">Admin</option>
                                         <option value="User">User</option>
+                                        <option value="Vendor">Vendor</option>
                                     </select>
                             </div>
                             <div class="form-group col-md-6">

@@ -129,6 +129,7 @@ require_once 'inc/html_head.php';
                                     <select name="permission" class="form-select">
                                         <option value="Admin" <?= $data->permission=='Admin'?'selected':'' ?>>Admin</option>
                                         <option value="User" <?= $data->permission=='User'?'selected':'' ?>>User</option>
+                                        <option value="Vendor" <?= $data->permission=='Vendor'?'selected':'' ?>>Vendor</option>
                                     </select>
                             </div>
                             <div class="form-group col-md-6">
