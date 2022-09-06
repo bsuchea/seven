@@ -8,9 +8,7 @@ try{
     $date = $_GET['d'];
     $total = $_GET['t'];
     $items = $_GET['items'];
-
-
-
+    
     $query = $con->prepare("INSERT INTO tbl_purchase VALUES(null, ?, ?, ?)");
     $query->bindParam(1, $total);
     $query->bindParam(2, $date);
