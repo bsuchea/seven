@@ -20,12 +20,16 @@ try{
     $pid = $con->lastInsertId();
 
     foreach($items as $item){
-        $query = $con->prepare("INSERT INTO tbl_purchase_detail VALUES(?, ?, ?, ?)");
-        $query->bindParam(1, $pid);
-        $query->bindParam(2, $item['id']);
-        $query->bindParam(3, $item['pqty']);
-        $query->bindParam(4, $item['punit']);
-        $query->execute();
+        $q1 = $con->prepare("INSERT INTO tbl_purchase_detail VALUES(?, ?, ?, ?)");
+        $q1->bindParam(1, $pid);
+        $q1->bindParam(2, $item['id']);
+        $q1->bindParam(3, $item['pqty']);
+        $q1->bindParam(4, $item['punit']);
+        $q1->execute();
+        $q2 = $con->prepare("UPDATE tbl_item SET current_stock= current_stock + ? WHERE item_id = ? ");
+        $q2->bindParam(1, $item['pqty']);
+        $q2->bindParam(2, $item['id']);
+        $q2->execute();
     }
 
     echo 'success';
