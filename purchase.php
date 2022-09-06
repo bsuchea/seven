@@ -18,27 +18,6 @@ require_once 'inc/html_head.php';
 
 <div class="app-wrapper">
     <div class="app-content pt-3 p-md-3 p-lg-4">
-
-        <?php
-
-        if (isset($_POST['add_purchase'])) {
-            $item_name = $_POST['item_name'];
-            $suppliers_name = $_POST['suppliers_name'];
-            $purchase_qty = $_POST['purchase_qty'];
-            $purchase_amount = $_POST['purchase_amount'];
-            $purchase_total = $_POST['purchase_total'];
-            $purchase_date = $_POST['purchase_date'];
-
-            $sql = $con->prepare("INSERT INTO tbl_purchase(item_id, suppliers_name, purchase_qty, purchase_amount, purchase_total, purchase_date) 
-                                    VALUES(?, ?, ?, ?, ?, ?)");
-            $sql->bindParam(1, $item_name);
-            $sql->bindParam(2, $suppliers_name);
-            $sql->bindParam(3, $purchase_qty);
-            $sql->bindParam(4, $purchase_amount);
-            $sql->bindParam(5, $purchase_total);
-            $sql->bindParam(6, $purchase_date);
-            }
-        ?>
         <?php if(isset($_SESSION['res'])){ echo $_SESSION['res']; unset($_SESSION['res']);}  ?>
         <div class="container-xl">
             <div class="position-relative mb-3">
@@ -179,18 +158,19 @@ require_once 'inc/html_head.php';
 
         $("#total").text(total);
 
-        console.log('working!' + JSON.stringify(items));
         return false;
     });
         
     $("#btnPurchase").click(function(){
         em = $("#suppliers_name").val();
         date = $("#purchase_date").val();
+        if(em == '') {errmsg('Please select Suppliers!'); return false;}
+        if(total <=0) {errmsg('Please Insert Item!'); return false;}
         $.ajax({
             // url: 'ajax/purchase.php?em='+em+'+date='+date,
             url: 'ajax/purchase.php',
             cache: false,
-            data: {items: items, em: em, d: date},
+            data: {items: items, em: em, d: date, t: total},
             success: function(res){
                 if(res == 'success'){
                     // success
@@ -200,15 +180,16 @@ require_once 'inc/html_head.php';
                     $('#purchase_qty').val('');
                     $('#purchase_unit_price').val('');
                     $("#total").text("");
+                    $("#tblproduct tbody").text("");
                     items = new Array();
                     total = 0;
+                    em = '';
                 }
                 Swal.fire(res, '', 'success');
             }, error: function(e){
                 console.log(e.responseText); 
             }
         });
-        console.log('working!');
         return false;
     });
 
