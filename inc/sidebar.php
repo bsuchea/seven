@@ -54,7 +54,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link <?= ($p=="sale")?'active':'' ?>" href="sale.php">
+                        <a class="nav-link <?= ($p=="sale" || $p=="sale_history")?'active':'' ?>" href="sale.php">
 						        <span class="nav-icon">
 									<svg  width="16" height="16" fill="currentColor"
                                          class="bi bi-folder-minus" viewBox="0 0 16 16">
@@ -66,7 +66,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link <?= ($p=="purchase")?'active':'' ?>" href="purchase.php">
+                        <a class="nav-link <?= ($p=="purchase" || $p=="purchase_history")?'active':'' ?>" href="purchase.php">
 						        <span class="nav-icon">
 						        <svg  width="16" height="16" fill="currentColor"
                                      class="bi bi-folder-plus" viewBox="0 0 16 16">
@@ -143,6 +143,9 @@
                         </a>
                     </li>
 
+                    <?php
+                    if ($row_select_logedin['permission'] == "Admin") {
+                    ?>
                     <li class="nav-item">
                         <a class="nav-link <?= ($p=="user" || $p=="user_create" || $p=="user_edit")?'active':'' ?>" href="user.php">
 						        <span class="nav-icon">
@@ -156,6 +159,7 @@
                             <span class="nav-link-text">Manage User</span>
                         </a>
                     </li>
+                    <?php } ?>
                 </ul><!--//app-menu-->
             </nav><!--//app-nav-->
         </div><!--//sidepanel-inner-->

@@ -37,8 +37,8 @@ include_once ("config/db.php");
 		    <div class="d-flex flex-column align-content-end">
 			    <div class="app-auth-body mx-auto">	
 				    <div class="app-auth-branding mb-3"><a class="app-logo" href="index.php"><img class="logo-icon me rounded-circle" src="assets/images/Logo.jpg" alt="logo"></a></div>
-					<h2 id="logtext" class="auth-heading text-center mb-3">Se7eN Esport</h2>
-					<h2 id="logtext" style="color:#15a362 ;" class="auth-heading text-center mb-5">សូមធ្វើការបំពេញព័ត៌មានសម្រាប់ការចូលប្រើប្រាស់ប្រព័ន្ធ</h2>
+					<h2 style="font-family: 'Bauhaus 93';" class="auth-heading text-center mb-3">Se7eN Esport</h2>
+					<h2 style="color:#15a362 ; font-family: 'Kantumruy Pro ExtraLight'; font-size:larger" class="auth-heading text-center mb-5">សូមធ្វើការបំពេញព័ត៌មានសម្រាប់ការចូលប្រើប្រាស់</h2>
 			        <div class="auth-form-container text-start">
 						<form class="auth-form login-form" action="#" method="post">
 						<?php
@@ -92,7 +92,7 @@ include_once ("config/db.php");
 											$_SESSION['Loged_id'] = $row_select['user_id'];
 
 											//Check Admin
-											if($row_select['permission' == 'Admin'] || $row_select['permission' == 'User']){
+											if($row_select['permission' == 'Admin'] || $row_select['permission' == 'User'] || $row_select['permission' == 'Vendor']){
 												header('location: dashboard.php');
 											}
 

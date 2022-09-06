@@ -73,8 +73,8 @@ require_once 'inc/html_head.php';
             <div class="position-relative mb-3">
                 <div class="row g-2 justify-content-between mb-3">
                     <div class="col-auto ">
-                        <h1 style="font-family: 'Kh Dangrek'; color:#15a362; font-size:large"
-                            class="app-page-title mb-2">ទំព័រព័ត៌មានអ្នកផ្គត់ផ្គង់</h1>
+                        <h1 style="font-family: 'Kantumruy Pro ExtraLight'; color:#15a362; font-size:large"
+                            class="app-page-title mb-2">ទំព័របញ្ចូលព័ត៌មានអ្នកផ្គត់ផ្គង់</h1>
                     </div>
                     <div class="container bg-white p-3 mt-3 shadow p-3 mb-5 bg-body rounded-4">
                         <form action="#" method="post">

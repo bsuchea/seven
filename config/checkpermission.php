@@ -53,7 +53,24 @@
             </div>     
         </div>
     <?php
-    } else{
+    } else if($row_select_logedin['permission' == "Vendor"]){
+        ?>
+        <div class="alert alert-secondary" style="height: 75px;" role="alert">
+            <div class="row">
+                <div>
+                    <a href="Users.php?ID=<?= $row_select_logedin['user_id'] ?>">
+                        
+                    </a>
+                </div>
+               
+                <div class="col-auto mt-1 ml-4">User : 
+                    <strong class="text-success"><?= $row_select_logedin['user_fullname'] ?></strong><br>
+                    <p>Permission : <span style="color: white ;" class="badge badge-pill badge-danger"><?= $row_select_logedin['permission'] ?></span></p>
+                </div>
+            </div>     
+        </div>
+    <?php
+    } else {
         //session_destroy();
         unset($_SESSION['Loged_id']);
     ?>

@@ -8,7 +8,7 @@ require_once 'inc/html_head.php';
 
     <!-- ::: Header Menu ::: -->
     <div class="app-header-inner">
-        <?php include('inc/header_menu.php') ?>
+        <?php include('inc/header_menu_kh.php') ?>
     </div>
     </div>
     <div id="app-sidepanel" class="app-sidepanel">
@@ -21,16 +21,16 @@ require_once 'inc/html_head.php';
     <div class="app-content pt-3 p-md-3 p-lg-4">
         <div class="container-xl">
 
-            <h1 style="font-family: 'Kantumruy Pro ExtraLight'; color:#15a362; font-size:large" class="app-page-title">ទំព័រដើម</h1>
+            <h1 style="font-family: 'Kantumruy Pro ExtraLight'; color:#15a362; font-size:large" class="app-page-title">Dashboard</h1>
 
             <div class="app-card alert alert-dismissible shadow-sm mb-4 border-left-decoration" role="alert">
                 <div class="inner">
                     <div class="app-card-body p-3 p-lg-1">
-                        <h4 style="font-family: 'Kantumruy Pro ExtraLight';" class="mb-2">សូមស្វាគមន៍</h4>
+                        <h4 style="font-family: 'Kantumruy Pro ExtraLight';" class="mb-2">Welcome</h4>
                         <div class="row gx-5 gy-3">
                             <div class="col-12 col-lg-12">
-                                <div style="font-family: 'Kantumruy Pro ExtraLight'">មកកាន់ប្រព័ន្ធគ្រប់គ្រងហាង​ Se7eN Esport
-                                    ដែលប្រព័ន្ធគ្រប់គ្រងនេះត្រូវបានបង្កើតឡើងក្នុងគោលបំណងបំពេញតម្រូវការរបស់ហាង
+                                <div style="font-family: 'Kantumruy Pro ExtraLight'">To Management System​ Se7eN Esport.
+                                    This Web Application made for store's requirements.
                                 </div>
                             </div><!--//col-->
                         </div><!--//row-->

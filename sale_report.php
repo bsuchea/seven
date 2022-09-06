@@ -27,7 +27,7 @@ require_once 'inc/html_head.php';
             <div class="position-relative mb-3">
                 <div class="row g-2 justify-content-between mb-1">
                     <div class="col-auto">
-                        <h1 style="font-family: 'Kh Dangrek'; color:#15a362; font-size:large"
+                        <h1 style="font-family: 'Kantumruy Pro ExtraLight'; color:#15a362; font-size:large"
                             class="app-page-title mb-3">របាយការណ៍នៃការលក់</h1>
                             <!-- <div class="mb-2">
                             <button class="btn btn-sm btn-success rounded-5">
