@@ -58,13 +58,9 @@ require_once 'inc/html_head.php';
                                         <thead>
                                         <tr>
                                             <th class="cell text-center">#</th>
-                                            <th class="cell">Product Name</th>
-                                            <th class="cell">Brand</th>
-                                            <th class="cell">Category</th>
-                                            <th class="cell">Stock</th>
-                                            <th class="cell">Unit Price</th>
-                                            <th class="cell">Date</th>
-                                            <th class="cell text-center">Description</th>
+                                            <th class="cell">Supplier Name</th>
+                                            <th class="cell">Purchase Total</th>
+                                            <th class="cell">Purchase Date</th>
                                             <th class="cell text-center">Action</th>
                                         </tr>
                                         </thead>
@@ -78,12 +74,10 @@ require_once 'inc/html_head.php';
                                             $page = 1;
                                         }
                                         $start_from = ($page - 1) * $limit;
-                                        $sql_select = $con->prepare("SELECT tbl_item.item_id,
-                                                                    tbl_item.item_name, tbl_brand.brand_name as brand_name,
-                                                                    tbl_category.category_name as category_name, tbl_item.current_stock,
-                                                                    tbl_item.unit_price, tbl_item.created_date, tbl_item.item_description FROM ((tbl_item
-                                                                    INNER JOIN tbl_brand ON tbl_item.brand_id = tbl_brand.brand_id)
-                                                                    INNER JOIN tbl_category ON tbl_item.category_id = tbl_category.category_id) ORDER BY item_id ASC LIMIT $start_from, $limit");
+                                        $sql_select = $con->prepare("SELECT tbl_purchase.purchase_id, tbl_purchase.purchase_total,
+                                                                    tbl_purchase.purchase_date, tbl_suppliers.suppliers_name as suppliers_name
+                                                                    FROM (tbl_purchase INNER JOIN tbl_suppliers ON tbl_suppliers.suppliers_id = tbl_purchase.suppliers_id) 
+                                                                    ORDER BY purchase_id ASC LIMIT $start_from, $limit");
 
                                         $sql_select->execute();
 
@@ -92,17 +86,13 @@ require_once 'inc/html_head.php';
                                         while ($row = $sql_select->fetch(PDO::FETCH_OBJ)) :
                                             $i++;
                                             ?>
-                                            <tr id="item<?= $row->item_id ?>">
+                                            <tr id="item<?= $row->purchase_id ?>">
                                                 <td class="text-center"><?= $i ?></td>
-                                                <td><?= $row->item_name ?></td>
-                                                <td><?= $row->brand_name ?></td>
-                                                <td><?= $row->category_name ?></td>
-                                                <td><?= $row->current_stock ?></td>
-                                                <td>$<?= $row->unit_price ?></td>
-                                                <td><?= $row->created_date ?></td>
-                                                <td><?= $row->item_description ?></td>
+                                                <td><?= $row->suppliers_name ?></td>
+                                                <td><?= $row->purchase_total ?>$</td>
+                                                <td><?= $row->purchase_date ?></td>
                                                 <td class="td-actions text-center">
-                                                    <a href="item_edit.php?id=<?= $row->item_id ?>" class="p-2" title="View Detail">
+                                                    <a href="view_purchase.php?id=<?= $row->purchase_id ?>" class="p-2" title="View Detail">
                                                         <svg  width="20" height="20" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
                                                         <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"/>
                                                         <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>
@@ -115,43 +105,36 @@ require_once 'inc/html_head.php';
                                         </tbody>
                                         <tfoot>
                                         <tr>
-                                        <th class="cell text-center">#</th>
-                                            <th class="cell">Product Name</th>
-                                            <th class="cell">Brand</th>
-                                            <th class="cell">Category</th>
-                                            <th class="cell">Stock</th>
-                                            <th class="cell">Unit Price</th>
-                                            <th class="cell">Date</th>
-                                            <th class="cell text-center">Description</th>
+                                            <th class="cell text-center">#</th>
+                                            <th class="cell">Supplier Name</th>
+                                            <th class="cell">Purchase Total</th>
+                                            <th class="cell">Purchase Date</th>
                                             <th class="cell text-center">Action</th>
                                         </tr>
                                         </tfoot>
                                     </table>
                                 </div><!--//table-responsive-->
                                 <?php
-                                $query = $con->query("SELECT tbl_item.item_id,
-                                                    tbl_item.item_name, tbl_brand.brand_name,
-                                                    tbl_category.category_name, tbl_item.current_stock,
-                                                    tbl_item.unit_price FROM ((tbl_item
-                                                    INNER JOIN tbl_brand ON tbl_item.brand_id = tbl_brand.brand_id)
-                                                    INNER JOIN tbl_category ON tbl_item.category_id = tbl_category.category_id)");
+                                $query = $con->query("SELECT tbl_purchase.purchase_id, tbl_purchase.purchase_total,
+                                tbl_purchase.purchase_date, tbl_suppliers.suppliers_name as suppliers_name
+                                FROM (tbl_purchase INNER JOIN tbl_suppliers ON tbl_suppliers.suppliers_id = tbl_purchase.suppliers_id)");
                                 $total_records = $query->rowCount();
                                 $total_pages = ceil($query->rowCount() / $limit);
                                 ?>
                                 <nav class="app-pagination mt-4">
                                     <ul class="pagination justify-content-center">
                                         <li class="page-item <?= $page == 1 ? 'disabled' : '' ?> ">
-                                            <a class="page-link" href="item.php?page=<?= $page - 1 ?>"
+                                            <a class="page-link" href="purchase_history.php?page=<?= $page - 1 ?>"
                                                tabindex="-1"
                                                aria-disabled="true">Previous</a>
                                         </li>
                                         <?php for ($i = 1; $i <= $total_pages; $i++): ?>
                                             <li class="page-item active"><a class="page-link"
-                                                                            href="item.php?page=<?= $i ?>"><?= $i ?></a>
+                                                                            href="purchase_history.php?page=<?= $i ?>"><?= $i ?></a>
                                             </li>
                                         <?php endfor; ?>
                                         <li class="page-item <?= $page == $total_pages ? 'disabled' : '' ?> ">
-                                            <a class="page-link" href="item.php?page=<?= $page + 1 ?>">Next</a>
+                                            <a class="page-link" href="purchase_history.php?page=<?= $page + 1 ?>">Next</a>
                                         </li>
                                     </ul>
                                 </nav><!--//app-pagination-->
@@ -174,36 +157,5 @@ require_once 'inc/html_head.php';
 
 <!-- ::: My Script ::: -->
 <?php include('contents/My_Scripts.php') ?>
-
-<!-- Modal Customer -->
-<script type="text/javascript">
-    function delItem(id){
-        swal.fire({
-            title: "Are you sure?",
-            text: "Do you really want to remove this Product?",
-            icon: "warning",
-            showDenyButton: true,
-            confirmButtonText: 'Delete',
-            denyButtonText: `Cancel`,
-        }).then((result) => {
-            if (result.isConfirmed) {
-                // Ajax processing or redirect back
-                $.ajax({
-                    url: 'ajax/item_delete.php',
-                    cache: false,
-                    data: {id: id},
-                    success: function(e){
-                        $('#item'+id).fadeOut();
-                        Swal.fire(e, '', 'success');
-                    }, error: function(e){
-                        console.log(e.responseText);
-                    }
-                });
-                
-            }
-        })
-    }
-
-</script>
 </body>
 </html>

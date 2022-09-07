@@ -47,7 +47,7 @@ require_once 'inc/html_head.php';
                         <h1 style="font-family: 'Kantumruy Pro ExtraLight'; color:#15a362; font-size:large"
                             class="app-page-title mb-2">ទំព័រប្រាក់បៀរវត្ស</h1>
                     </div>
-                    <div class="container bg-white p-3 mt-3 shadow p-3 mb-5 bg-body rounded-4">
+                    <div class="container bg-white p-3 mt-3 shadow p-3 mb-2 bg-body rounded-4">
                         <form action="#" method="post">
                             <div class="form-row">
                                 <div class="form-group col-md-4">
@@ -93,7 +93,7 @@ require_once 'inc/html_head.php';
                     </div>
                        
                     <!-- Table -->
-                    <div class="container p-3 mt-3 shadow p-3 mb-5 rounded-4">
+                    <div class="container p-3 mt-2 shadow p-3 mb-2 rounded-4">
                     <div class="tab-content" id="orders-table-tab-content">
                     <div class="tab-pane fade show active" id="orders-all" role="tabpanel" aria-labelledby="orders-all-tab">
                         <div class="app-card app-card-orders-table shadow-sm mb-5 mt-1">

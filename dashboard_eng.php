@@ -8,11 +8,11 @@ require_once 'inc/html_head.php';
 
     <!-- ::: Header Menu ::: -->
     <div class="app-header-inner">
-        <?php include('inc/header_menu_kh.php') ?>
+        <?php include('inc/header_menu_eng.php') ?>
     </div>
     </div>
     <div id="app-sidepanel" class="app-sidepanel">
-        <?php include('inc/sidebar.php') ?>
+        <?php include('inc/sidebar_eng.php') ?>
     </div><!--//app-sidepanel-->
 </header><!--//app-header-->
 
