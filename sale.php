@@ -19,24 +19,6 @@ require_once 'inc/html_head.php';
 <div class="app-wrapper">
     <div class="app-content pt-3 p-md-3 p-lg-4">
 
-        <?php
-
-        if (isset($_POST['add_sale'])) {
-            $buyer_name = $_POST['buyer_name'];
-            $buyer_phone = $_POST['buyer_phone'];
-            $item_name = $_POST['item_name'];
-            $sale_qty = $_POST['sale_qty'];
-            $sale_date = $_POST['sale_date'];
-
-                $sql = $con->prepare("INSERT INTO tbl_sale(buyer_name, buyer_phone, item_name, sale_qty, sale_date) 
-                                    VALUES(?, ?, ?, ?, ?)");
-                $sql->bindParam(1, $buyer_name);
-                $sql->bindParam(2, $buyer_phone);
-                $sql->bindParam(3, $item_name);
-                $sql->bindParam(4, $sale_qty);
-                $sql->bindParam(5, $sale_date);
-        }
-        ?>
         <?php if(isset($_SESSION['res'])){ echo $_SESSION['res']; unset($_SESSION['res']);}  ?>
         <div class="container-xl">
             <div class="position-relative mb-3">
@@ -76,13 +58,13 @@ require_once 'inc/html_head.php';
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="inputID">Product Name</label>
-                                    <select name="item_name" id="item_name" class="form-select" data-unitprice="12">
+                                    <select name="item_name" id="item_name" class="form-select">
                                         <option hidden value="">Select Product</option>
                                         <?php 
                                             $stmt = $con->query("SELECT * FROM tbl_item");
                                             while($row = $stmt->fetch(PDO::FETCH_OBJ)):
                                         ?>
-                                        <option value="<?= $row->item_id ?>"><?= $row->item_name ?></option>
+                                        <option value="<?= $row->item_id ?>" data-up="<?= $row->unit_price ?>"><?= $row->item_name ?></option>
                                         <?php endwhile; ?>
                                     </select>
                                 </div>
@@ -111,17 +93,13 @@ require_once 'inc/html_head.php';
                                     <table id="tblproduct" class="table app-table-hover mb-0 text-left">
                                         <thead>
                                             <tr>
-                                                <th class="cell">Buyer Name</th>
-                                                <th class="cell">Buyer Phone</th>
                                                 <th class="cell">Product Name</th>
+                                                <th class="cell">Unit Price</th>
                                                 <th class="cell">Quantity</th>
                                                 <th class="cell">Amount($)</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                
-                                            </tr>
                                         </tbody>
                                     </table>
                                 </div>
@@ -165,53 +143,64 @@ require_once 'inc/html_head.php';
     });
 
     $("#btnAdd").click(function(){
-        if($('#buyer_name').val() == "") {errmsg('Please input Buyer Name!'); return false;}
-        if($('#buyer_phone').val() == "") {errmsg('Please input Buyer Phone!'); return false;}
-        if($('#item_name').val() == "") {errmsg('Please select Product!'); return false;}
-        if($('#sale_qty').val() == "") {errmsg('Please insert Sale Quantity!'); return false; }
+        pid = $('#item_name').val();
+        pname = $('#item_name option:selected').text();
+        punit = $('#item_name option:selected').data('up');
+        pqty = $('#sale_qty').val();
+        
+        if(pid == '') {errmsg('Please select Product!'); return false;}
+        if(pqty == '') {errmsg('Please insert Sale Quantity!'); return false; }
 
-        let newRowContent = "<td>"+$('#buyer_name').val() +"</td>" + "<td>"+$('#buyer_phone').val() +"</td>" + "<td>"+$('#item_name option:selected').text() +"</td>" + "<td>"+$('#sale_qty').val() +"</td>" + "<td>"+$('#sale_qty').val() * $('unitprice').val() +"</td>";
+        let newRowContent = "<td>"+ pname +"</td>" + "<td>"+ punit +"</td>" +"<td>"+ pqty +"</td>" + "<td>"+pqty * punit +"</td>";
 
         $("#tblproduct tbody").append("<tr>"+newRowContent+"</tr>");
 
-        total += $('#sale_qty').val() * $('unitprice').val();
+        total += pqty * punit;
 
-        item = {buyn:$('#buyer_name').val(), buyp:$('#buyer_phone').val(), id:$('#item_name').val(), pqty:$('#sale_qty').val(), punit:$('unitprice').val()};
+        item = {pid: pid, pqty: pqty, punit: punit};
 
         items.push(item);
 
         $("#total").text(total);
 
-        console.log('working!' + JSON.stringify(items));
+        console.log('d: ' + JSON.stringify(items));
         return false;
     });
         
     $("#btnSale").click(function(){
-        em = $("#suppliers_name").val();
-        date = $("#purchase_date").val();
+        b = $('#buyer_name').val();
+        bp = $('#buyer_phone').val();
+        date = $("#sale_date").val();
+        if(b =='') {errmsg('Please input Buyer Name!'); return false;}
+        if(bp =='') {errmsg('Please input Buyer Phone!'); return false;}
         $.ajax({
-            // url: 'ajax/purchase.php?em='+em+'+date='+date,
             url: 'ajax/sale.php',
             cache: false,
-            data: {items: items, em: em, d: date},
+            data: {items: items,tol: total, b: b, bp: bp, d: date},
             success: function(res){
                 if(res == 'success'){
                     // success
-                    $("#suppliers_name").val('');
-                    $("#purchase_date").val(new Date().toISOString().slice(0, 10));
                     $('#item_name').val('');
-                    $('#purchase_qty').val('');
-                    $('#purchase_unit_price').val('');
+                    $('#sale_qty').val('');
                     $("#total").text("");
+                    $("#tblproduct tbody").text("");
+                    $('#buyer_name').val('');
+                    $('#buyer_phone').val('');
+                    pid = '';
+                    pname = '';
+                    punit = '';
+                    pqty = '';
+                    b = '';
+                    bp = '';
                     items = new Array();
                     total = 0;
                 }
+                console.log('working!');
                 Swal.fire(res, '', 'success');
             }, error: function(e){
                 console.log(e.responseText); 
             }
         });
-        console.log('working!');
         return false;
     });
 
