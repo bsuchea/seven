@@ -27,9 +27,9 @@
             <?php include('config/checkpermission.php'); ?>
 
             <nav id="app-nav-main" class="app-nav app-nav-main flex-grow-1">
-                <ul class="app-menu list-unstyled accordion" id="menu-accordion" style="font-family: 'Kantumruy Pro Medium'; font-size:medium">
+                <ul class="app-menu list-unstyled accordion" id="menu-accordion">
                     <li class="nav-item">
-                        <a class="nav-link <?= ($p=="dashboard")?'active':'' ?>" href="dashboard.php">
+                        <a class="nav-link <?= ($p=="dashboard" || $p=="dashboard")?'active':'' ?>" href="dashboard.php">
 						        <span class="nav-icon">
 						        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-house-door"
                                      fill="currentColor" >
@@ -38,7 +38,7 @@
 		  							<path fill-rule="evenodd"
                                           d="M13 2.5V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z"/></svg>
 						        </span>
-                            <span​ class="nav-link-text">ទំព័រដើម</span>
+                            <span​ class="nav-link-text">Dashboard</span>
                         </a>
                     </li>
                     <li class="nav-item">
@@ -50,7 +50,7 @@
   									<path fill-rule="evenodd"
                                           d="M13.81 4H2.19a1 1 0 0 0-.996 1.09l.637 7a1 1 0 0 0 .995.91h10.348a1 1 0 0 0 .995-.91l.637-7A1 1 0 0 0 13.81 4zM2.19 3A2 2 0 0 0 .198 5.181l.637 7A2 2 0 0 0 2.826 14h10.348a2 2 0 0 0 1.991-1.819l.637-7A2 2 0 0 0 13.81 3H2.19z"/></svg>
 						        </span>
-                            <span class="nav-link-text">ស្តុកទំនិញ</span>
+                            <span class="nav-link-text">Item</span>
                         </a>
                     </li>
                     <li class="nav-item">
@@ -62,7 +62,7 @@
 									<path d="M11 11.5a.5.5 0 0 1 .5-.5h4a.5.5 0 1 1 0 1h-4a.5.5 0 0 1-.5-.5z"/>
 									</svg>
 						        </span>
-                            <span class="nav-link-text">លក់ទំនិញ</span>
+                            <span class="nav-link-text">Sale</span>
                         </a>
                     </li>
                     <li class="nav-item">
@@ -73,7 +73,7 @@
   									<path d="m.5 3 .04.87a1.99 1.99 0 0 0-.342 1.311l.637 7A2 2 0 0 0 2.826 14H9v-1H2.826a1 1 0 0 1-.995-.91l-.637-7A1 1 0 0 1 2.19 4h11.62a1 1 0 0 1 .996 1.09L14.54 8h1.005l.256-2.819A2 2 0 0 0 13.81 3H9.828a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 6.172 1H2.5a2 2 0 0 0-2 2zm5.672-1a1 1 0 0 1 .707.293L7.586 3H2.19c-.24 0-.47.042-.683.12L1.5 2.98a1 1 0 0 1 1-.98h3.672z"/>
   									<path d="M13.5 10a.5.5 0 0 1 .5.5V12h1.5a.5.5 0 1 1 0 1H14v1.5a.5.5 0 1 1-1 0V13h-1.5a.5.5 0 0 1 0-1H13v-1.5a.5.5 0 0 1 .5-.5z"/></svg>
 						        </span>
-                            <span class="nav-link-text">បញ្ចូលស្តុកទំនិញ</span>
+                            <span class="nav-link-text">Purchase</span>
                         </a>
                     </li>
 
@@ -84,7 +84,7 @@
                                     <path fill-rule="evenodd" d="M6 3.5A1.5 1.5 0 0 1 7.5 2h1A1.5 1.5 0 0 1 10 3.5v1A1.5 1.5 0 0 1 8.5 6v1H14a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-1 0V8h-5v.5a.5.5 0 0 1-1 0V8h-5v.5a.5.5 0 0 1-1 0v-1A.5.5 0 0 1 2 7h5.5V6A1.5 1.5 0 0 1 6 4.5v-1zM8.5 5a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1zM0 11.5A1.5 1.5 0 0 1 1.5 10h1A1.5 1.5 0 0 1 4 11.5v1A1.5 1.5 0 0 1 2.5 14h-1A1.5 1.5 0 0 1 0 12.5v-1zm1.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1zm4.5.5A1.5 1.5 0 0 1 7.5 10h1a1.5 1.5 0 0 1 1.5 1.5v1A1.5 1.5 0 0 1 8.5 14h-1A1.5 1.5 0 0 1 6 12.5v-1zm1.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1zm4.5.5a1.5 1.5 0 0 1 1.5-1.5h1a1.5 1.5 0 0 1 1.5 1.5v1a1.5 1.5 0 0 1-1.5 1.5h-1a1.5 1.5 0 0 1-1.5-1.5v-1zm1.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1z"/>
                                     </svg>
 						        </span>
-                            <span class="nav-link-text">ប្រភេទទំនិញ និងប្រេន</span>
+                            <span class="nav-link-text">Brand and Category</span>
                         </a>
                     </li>
 
@@ -95,7 +95,7 @@
                                          viewBox="0 0 16 16">
   									<path d="M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1h8zm-7.978-1A.261.261 0 0 1 7 12.996c.001-.264.167-1.03.76-1.72C8.312 10.629 9.282 10 11 10c1.717 0 2.687.63 3.24 1.276.593.69.758 1.457.76 1.72l-.008.002a.274.274 0 0 1-.014.002H7.022zM11 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0zM6.936 9.28a5.88 5.88 0 0 0-1.23-.247A7.35 7.35 0 0 0 5 9c-4 0-5 3-5 4 0 .667.333 1 1 1h4.216A2.238 2.238 0 0 1 5 13c0-1.01.377-2.042 1.09-2.904.243-.294.526-.569.846-.816zM4.92 10A5.493 5.493 0 0 0 4 13H1c0-.26.164-1.03.76-1.724.545-.636 1.492-1.256 3.16-1.275zM1.5 5.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0zm3-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"/></svg>
 						        </span>
-                            <span class="nav-link-text">អ្នកផ្គត់ផ្គង់</span>
+                            <span class="nav-link-text">Suppliers</span>
                         </a>
                     </li>
 
@@ -124,7 +124,7 @@
                                      viewBox="0 0 16 16">
   									<path d="M4 10.781c.148 1.667 1.513 2.85 3.591 3.003V15h1.043v-1.216c2.27-.179 3.678-1.438 3.678-3.3 0-1.59-.947-2.51-2.956-3.028l-.722-.187V3.467c1.122.11 1.879.714 2.07 1.616h1.47c-.166-1.6-1.54-2.748-3.54-2.875V1H7.591v1.233c-1.939.23-3.27 1.472-3.27 3.156 0 1.454.966 2.483 2.661 2.917l.61.162v4.031c-1.149-.17-1.94-.8-2.131-1.718H4zm3.391-3.836c-1.043-.263-1.6-.825-1.6-1.616 0-.944.704-1.641 1.8-1.828v3.495l-.2-.05zm1.591 1.872c1.287.323 1.852.859 1.852 1.769 0 1.097-.826 1.828-2.2 1.939V8.73l.348.086z"/></svg>
 						         </span>
-                            <span class="nav-link-text">ប្រាក់បៀរវត្ស</span>
+                            <span class="nav-link-text">Salary</span>
                         </a>
                     </li>
                     <?php } ?>
@@ -139,7 +139,7 @@
                                           d="M4 2h7a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zm0 1a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h7a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1H4z"/>
 	  								<path d="M6 0h7a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2v-1a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H6a1 1 0 0 0-1 1H4a2 2 0 0 1 2-2z"/></svg>
 						        </span>
-                            <span class="nav-link-text">របាយការណ៍</span>
+                            <span class="nav-link-text">Reports</span>
                         </a>
                     </li>
 
@@ -156,7 +156,7 @@
                                       d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
 								</svg>
 						         </span>
-                            <span class="nav-link-text">គ្រប់គ្រងអ្នកប្រើប្រាស់</span>
+                            <span class="nav-link-text">Manage User</span>
                         </a>
                     </li>
                     <?php } ?>

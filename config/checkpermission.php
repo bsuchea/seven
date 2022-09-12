@@ -29,10 +29,10 @@
                     </a>
                 </div>
                
-                <div class="col-auto mt-1 ml-1" style="font-family: 'Kantumruy Pro Medium';font-size:medium;">
-                    អ្នកប្រើប្រាស់ : 
+                <div class="col-auto mt-1 ml-4">
+                    User : 
                     <strong class="text-success"><?= $row_select_logedin['user_fullname'] ?></strong><br>
-                    <p>សិទ្ធប្រើប្រាស់ : <span class="badge badge-pill badge-success"><?= $row_select_logedin['permission'] ?></span></p>
+                    <p>Permission : <span class="badge badge-pill badge-success"><?= $row_select_logedin['permission'] ?></span></p>
                 </div>
             </div>     
         </div>
@@ -47,10 +47,10 @@
                     </a>
                 </div>
                
-                <div class="col-auto mt-1 ml-1" style="font-family: 'Kantumruy Pro Medium';font-size:medium;">
-                    អ្នកប្រើប្រាស់ : 
+                <div class="col-auto mt-1 ml-1">
+                    User : 
                     <strong class="text-success"><?= $row_select_logedin['user_fullname'] ?></strong><br>
-                    <p>សិទ្ធប្រើប្រាស់ : <span style="color: white ;" class="badge badge-pill badge-warning"><?= $row_select_logedin['permission'] ?></span></p>
+                    <p>Permission : <span style="color: white ;" class="badge badge-pill badge-warning"><?= $row_select_logedin['permission'] ?></span></p>
                 </div>
             </div>     
         </div>
@@ -65,10 +65,10 @@
                     </a>
                 </div>
                
-                <div class="col-auto mt-1 ml-1" style="font-family: 'Kantumruy Pro Medium';font-size:medium;">
-                    អ្នកប្រើប្រាស់ : 
+                <div class="col-auto mt-1 ml-1">
+                    User : 
                     <strong class="text-success"><?= $row_select_logedin['user_fullname'] ?></strong><br>
-                    <p>សិទ្ធប្រើប្រាស់ : <span style="color: white ;" class="badge badge-pill badge-danger"><?= $row_select_logedin['permission'] ?></span></p>
+                    <p>Permission : <span style="color: white ;" class="badge badge-pill badge-danger"><?= $row_select_logedin['permission'] ?></span></p>
                 </div>
             </div>     
         </div>

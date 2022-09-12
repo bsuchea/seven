@@ -93,7 +93,7 @@ include_once ("config/db.php");
 
 											//Check Admin
 											if($row_select['permission' == 'Admin'] || $row_select['permission' == 'User'] || $row_select['permission' == 'Vendor']){
-												header('location: dashboard_eng.php');
+												header('location: dashboard.php');
 											}
 
 										}

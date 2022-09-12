@@ -25,7 +25,7 @@ require_once 'inc/html_head.php';
                 <div class="row g-2 justify-content-between mb-3">
                     <div class="col-auto ">
                         <h1 style="font-family: 'Kantumruy Pro ExtraLight'; color:#15a362; font-size:large"
-                            class="app-page-title mb-2">ទំព័ររបាយការណ៍លក់ទំនិញ</h1>
+                            class="app-page-title mb-2">ទំព័ររបាយការណ៍ប្រាក់បៀរវត្ស</h1>
 
                             <div class="mb-2">
                             <button class="btn btn-sm btn-success rounded-5">
@@ -71,8 +71,8 @@ require_once 'inc/html_head.php';
                                         <thead>
                                             <tr>
                                                 <th class="cell">Date</th>
-                                                <th class="cell">Buyer Name</th>
-                                                <th class="cell">Total</th>
+                                                <th class="cell">Vendor Name</th>
+                                                <th class="cell">Total Salary</th>
                                                 <th class="cell">Actions</th>
                                             </tr>
                                         </thead>
