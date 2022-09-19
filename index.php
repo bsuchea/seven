@@ -155,7 +155,7 @@ include_once ("config/db.php");
 		    <div class="auth-background-overlay p-3 p-lg-5">
 			    <div class="d-flex flex-column align-content-end h-100">
 				    <div class="h-100"></div>
-				    <div id="footbarlog" class="overlay-content p-3 p-lg-4 rounded">
+				    <div style="font-family:'Kantumruy Pro ExtraLight'; text-align:center" class="overlay-content p-3 p-lg-4 rounded">
 					    <h5 class="mb-3 overlay-title">ស្វាគមន៍មកកាន់ Se7eN Esport</h5>
 						<div>ប្រព័ន្ធគ្រប់គ្រងនេះត្រូវបានសិក្សាសា្រវជ្រាវនិងបង្កើតឡើងដោយក្រុមនិស្សិត ស.ជ.ប.ដ ដែលមានសមាជិក ៣រូបគឺ <p class="m-2 mb-2">១.សែស សុវណ្ណគីរី ២.ឡុង ភ័ក្រ្ត ៣.ស៊ីវ សុវឌ្ឍនៈ</p></div>
 				    </div>

@@ -39,7 +39,7 @@ require_once 'inc/html_head.php';
 			';
             } else {
 
-                $sql = $con->prepare("UPDATE tbl_brand SET WHERE ");
+                $sql = $con->prepare("UPDATE tbl_brand SET brand_name=?, description=? WHERE brand_id = ? ");
                 $sql->bindParam(1, $brand_name);
                 $sql->bindParam(2, $description);
 

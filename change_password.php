@@ -9,10 +9,8 @@ require_once 'inc/html_head.php';
 		    <div class="d-flex flex-column align-content-end">
 			    <div class="app-auth-body mx-auto">	
 				    <div class="app-auth-branding mb-4"><a class="app-logo" href="index.php"><img class="logo-icon me-0 rounded-circle" src="assets/images/Logo.jpg" alt="logo"></a></div>
-					<h2 id="logtext" style="color:#15a362 ;" class="auth-heading text-center mb-4">ទំព័រផ្លាស់ប្តូរពាក្យសម្ងាត់</h2>
-
-					<div style="font-family:'Kh Dangrek';font-size: 13px;" class="auth-intro mb-4 text-center">សូមធ្វើការវាយបញ្ចូលពាក្យសម្ងាត់ចាស់ជាមុនសិន រួចធ្វើការបំពេញពាក្យសម្ងាត់ថ្មីនិង<p class="m-2">ធ្វើការចុចប៊ូតុង Change Password ជាការស្រេច!!</p></div>
-	
+					<h2 style="color:#15a362 ; font-family: 'Kantumruy Pro ExtraLight'" class="auth-heading text-center mb-4">ទំព័រផ្លាស់ប្តូរពាក្យសម្ងាត់</h2>
+					
 					<div class="auth-form-container text-left">
 						
 						<form class="auth-form resetpass-form">                
@@ -49,7 +47,7 @@ require_once 'inc/html_head.php';
 		    <div class="auth-background-overlay p-3 p-lg-5">
 			    <div class="d-flex flex-column align-content-end h-100">
 				    <div class="h-100"></div>
-				    <div id="footbarlog" class="overlay-content p-3 p-lg-4 rounded">
+				    <div style="font-family:'Kantumruy Pro ExtraLight'; text-align:center" class="overlay-content p-3 p-lg-4 rounded">
 					    <h5 class="mb-3 overlay-title">សូមអរគុណសម្រាប់ការដាក់ប្រើប្រាស់ប្រព័ន្ធនេះ</h5>
 					    <div>ប្រព័ន្ធគ្រប់គ្រងនេះត្រូវបានសិក្សាសា្រវជ្រាវនិងបង្កើតឡើងដោយក្រុមនិស្សិត ស.ជ.ប.ដ ដែលមានសមាជិក ៣រូបគឺ <p class="m-2 mb-2">១.សែស សុវណ្ណគីរី ២.ឡុង ភ័ក្រ្ត ៣.ស៊ីវ សុវឌ្ឍនៈ</p></div>
 				    </div>

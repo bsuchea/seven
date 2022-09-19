@@ -32,13 +32,13 @@ require_once 'inc/html_head.php';
                             INNER JOIN tbl_category ON tbl_item.category_id = tbl_category.category_id) WHERE tbl_item.item_id = ". $_GET['id'])->fetch(PDO::FETCH_OBJ);
 
         if (isset($_POST['update_item'])) {
-            $itemname = $_POST['item_name'];
+            $item_name = $_POST['item_name'];
             $brand = $_POST['brand'];
             $category = $_POST['category'];
-            $category = $_POST['unit_price'];
+            $unit_price = $_POST['unit_price'];
             $description = $_POST['description'];
 
-            if (empty($itemname) || empty($brand) || empty($category) || empty($description)) {
+            if (empty($item_name) || empty($brand) || empty($category) || empty($unit_price)) {
                 echo '
 				<div class="alert alert-warning alert-dismissible fade show">
 					<strong>Message!</strong> Please input a correct data.
@@ -47,17 +47,20 @@ require_once 'inc/html_head.php';
 			';
             } else {
 
-                $sql = $con->prepare("UPDATE tbl_supplier SET WHERE ");
-                $sql->bindParam(1, $itemname);
+                $sql = $con->prepare("UPDATE tbl_item SET item_name=?, brand_id=?,
+                                     category_id=?, unit_price=?, 
+                                     item_description=?  WHERE item_id = ? ");
+                $sql->bindParam(1, $item_name);
                 $sql->bindParam(2, $brand);
-                $sql->bindParam(3, $description);
-                $sql->bindParam(4, $category);
+                $sql->bindParam(3, $category);
+                $sql->bindParam(4, $unit_price);
                 $sql->bindParam(5, $description);
+                $sql->bindParam(6, $item_id);
 
                 if ($sql->execute()) {
                     echo '
 					<div class="alert alert-success alert-dismissible fade show">
-						<strong>Message!</strong> Insert Data success. Now you can back.
+						<strong>Message!</strong> Update Data Success. Now you can back.
 						<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 					</div>
 				';
@@ -94,7 +97,7 @@ require_once 'inc/html_head.php';
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="inputID">Product Name</label>
-                                    <input name="itemname" value="<?= $data->item_name ?>" class="form-control" type="text" placeholder="Product Name">
+                                    <input name="item_name" value="<?= $data->item_name ?>" class="form-control" type="text" placeholder="Product Name">
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="form-select" class="form-label">Brand</label>
