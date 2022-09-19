@@ -5,7 +5,6 @@ require_once 'inc/html_head.php';
 ?>
 <body class="app">
 <header class="app-header fixed-top">
-
     <!-- ::: Header Menu ::: -->
     <div class="app-header-inner">
         <?php include('inc/header_menu.php') ?>

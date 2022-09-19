@@ -70,7 +70,7 @@ require_once 'inc/html_head.php';
                                             <th class="cell text-center">#</th>
                                             <th class="cell">Brand Name</th>
                                             <th class="cell">Description or Notes</th>
-                                            <th></th>
+                                            <th class="cell text-center">Action</th>
                                         </tr>
                                         </thead>
 
@@ -125,7 +125,7 @@ require_once 'inc/html_head.php';
                                             <th class="cell text-center">#</th>
                                             <th class="cell">Brand Name</th>
                                             <th class="cell">Description or Notes</th>
-                                            <th></th>
+                                            <th class="cell text-center">Action</th>
                                         </tr>
                                         </tfoot>
                                     </table>

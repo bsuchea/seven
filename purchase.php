@@ -120,8 +120,8 @@ require_once 'inc/html_head.php';
                     </div> 
                     </div><!--end table-->
                     <!-- Total -->
-                    <div style="width: 20%;" class="container bg-light p-3 shadow rounded-4 mr-5">
-                        <h6>Purchase Total : <span id="total"></span>$</h6>
+                    <div style="width: 20%;" class="container bg-light p-3 shadow rounded-4 mr-5 border border-success">
+                        <h6>Total : <span id="total"></span>$</h6>
                     </div>
                     <!-- End Total -->
                     <div class="text-center mt-3">

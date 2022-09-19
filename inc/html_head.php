@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Se7en Esport Management System</title>
+    <title>Seven Esport</title>
 
     <!-- Meta -->
     <meta charset="utf-8">
