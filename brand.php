@@ -28,7 +28,7 @@ require_once 'inc/html_head.php';
                 <div class="row g-2 justify-content-between mb-1">
                     <div class="col-auto">
                         <h1 style="font-family: 'Kantumruy Pro ExtraLight'; color:#15a362; font-size:large"
-                            class="app-page-title mb-3">ទំព័រព័ត៌មានយីហោ</h1>
+                            class="app-page-title mb-3">ទំព័រព័ត៌មានប្រេន</h1>
                             <div class="mb-2">
                             <button class="btn btn-sm btn-success rounded-5">
                             <a style="color: white; text-decoration: none;" href="brand_and_category.php">

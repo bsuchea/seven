@@ -42,6 +42,7 @@ require_once 'inc/html_head.php';
                 $sql = $con->prepare("UPDATE tbl_brand SET brand_name=?, description=? WHERE brand_id = ? ");
                 $sql->bindParam(1, $brand_name);
                 $sql->bindParam(2, $description);
+                $sql->bindParam(3, $brand_id);
 
                 if ($sql->execute()) {
                     echo '
@@ -67,7 +68,7 @@ require_once 'inc/html_head.php';
                 <div class="row g-2 justify-content-between mb-3">
                     <div class="col-auto ">
                         <h1 style="font-family: 'Kantumruy Pro ExtraLight'; color:#15a362; font-size:large"
-                            class="app-page-title mb-2">កែប្រែព័ត៌មានយីហោ</h1>
+                            class="app-page-title mb-2">កែប្រែព័ត៌មានប្រេន</h1>
                     </div>
                     <div class="container bg-white p-3 mt-3 shadow p-3 mb-5 bg-body rounded-4">
                         <form action="#" method="post">

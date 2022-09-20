@@ -16,7 +16,7 @@ try{
     $query->bindParam(1, $total);
     $query->bindParam(2, $date);
     $query->bindParam(3, $buyer);
-    $query->bindParam(3, $buyer_phone);
+    $query->bindParam(4, $buyer_phone);
     $query->execute();
 
     $pid = $con->lastInsertId();

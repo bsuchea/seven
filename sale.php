@@ -94,8 +94,8 @@ require_once 'inc/html_head.php';
                                         <thead>
                                             <tr>
                                                 <th class="cell">Product Name</th>
-                                                <th class="cell">Unit Price</th>
                                                 <th class="cell">Quantity</th>
+                                                <th class="cell">Unit Price($)</th>
                                                 <th class="cell">Amount($)</th>
                                             </tr>
                                         </thead>
@@ -151,7 +151,7 @@ require_once 'inc/html_head.php';
         if(pid == '') {errmsg('Please select Product!'); return false;}
         if(pqty == '') {errmsg('Please insert Sale Quantity!'); return false; }
 
-        let newRowContent = "<td>"+ pname +"</td>" + "<td>"+ punit +"</td>" +"<td>"+ pqty +"</td>" + "<td>"+pqty * punit +"</td>";
+        let newRowContent = "<td>"+ pname +"</td>" + "<td>"+ pqty +"</td>" +"<td>"+ punit +"</td>" + "<td>"+pqty * punit +"</td>";
 
         $("#tblproduct tbody").append("<tr>"+newRowContent+"</tr>");
 

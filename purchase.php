@@ -103,8 +103,8 @@ require_once 'inc/html_head.php';
                                             <tr>
                                                 <th class="cell">Product Name</th>
                                                 <th class="cell">Quantity</th>
-                                                <th class="cell">Unit Price ($)</th>
-                                                <th class="cell">Amount ($)</th>
+                                                <th class="cell">Unit Price($)</th>
+                                                <th class="cell">Amount($)</th>
                                             </tr>
                                         </thead>
                                         <tbody>
