@@ -97,7 +97,6 @@ require_once 'inc/html_head.php';
                                             $page = 1;
                                         }
                                         $start_from = ($page - 1) * $limit;
-<<<<<<< HEAD
                                         
                                         if(isset($_GET['seach'])){
                                             if($_GET['search_str']==''){
@@ -110,10 +109,6 @@ require_once 'inc/html_head.php';
                                         }else{
                                             $sql_select = $con->prepare("SELECT * FROM tbl_sale ORDER BY sale_id ASC LIMIT $start_from, $limit");
                                         }
-=======
-                                        $sql_select = $con->prepare("SELECT * FROM tbl_sale
-                                                                    ORDER BY sale_id DESC LIMIT $start_from, $limit");
->>>>>>> d7b6ff35d7e0cfae572def2b54da1e1e4d66d9de
 
                                         $sql_select->execute();
 
