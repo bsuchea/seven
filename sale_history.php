@@ -75,9 +75,15 @@ require_once 'inc/html_head.php';
                                         <thead>
                                         <tr>
                                             <th class="cell text-center">#</th>
+                                            <th class="cell">Date</th>
                                             <th class="cell">Buyer Name</th>
+<<<<<<< HEAD
                                             <th class="cell">Sale Total</th>
                                             <th class="cell">Sale Date</th>
+=======
+                                            <th class="cell">Buyer Phone</th>
+                                            <th class="cell">Total</th>
+>>>>>>> d7b6ff35d7e0cfae572def2b54da1e1e4d66d9de
                                             <th class="cell text-center">Action</th>
                                         </tr>
                                         </thead>
@@ -91,6 +97,7 @@ require_once 'inc/html_head.php';
                                             $page = 1;
                                         }
                                         $start_from = ($page - 1) * $limit;
+<<<<<<< HEAD
                                         
                                         if(isset($_GET['seach'])){
                                             if($_GET['search_str']==''){
@@ -103,6 +110,10 @@ require_once 'inc/html_head.php';
                                         }else{
                                             $sql_select = $con->prepare("SELECT * FROM tbl_sale ORDER BY sale_id ASC LIMIT $start_from, $limit");
                                         }
+=======
+                                        $sql_select = $con->prepare("SELECT * FROM tbl_sale
+                                                                    ORDER BY sale_id DESC LIMIT $start_from, $limit");
+>>>>>>> d7b6ff35d7e0cfae572def2b54da1e1e4d66d9de
 
                                         $sql_select->execute();
 
@@ -112,10 +123,11 @@ require_once 'inc/html_head.php';
                                             $i++;
                                             ?>
                                             <tr id="item<?= $row->sale_id ?>">
-                                                <td class="text-center"><?= $i ?></td>
-                                                <td><?= $row->buyer_name ?></td>
-                                                <td><?= $row->sale_cost ?>$</td>
+                                                <td class="text-center"><?= $row->sale_id ?></td>
                                                 <td><?= $row->sale_date ?></td>
+                                                <td><?= $row->buyer_name ?></td>
+                                                <td><?= $row->buyer_phone ?></td>
+                                                <td><?= $row->sale_cost ?>$</td>
                                                 <td class="td-actions text-center">
                                                     <a href="view_sale.php?id=<?= $row->sale_id ?>" class="ml-1" title="View Detail">
                                                         <svg width="20" height="20" fill="green" class="bi bi-card-text" viewB="0 0 16 16">
@@ -128,6 +140,10 @@ require_once 'inc/html_head.php';
                                                         <path d="M2.5 8a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1z"/>
                                                         <path d="M5 1a2 2 0 0 0-2 2v2H2a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h1v1a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-1h1a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-1V3a2 2 0 0 0-2-2H5zM4 3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2H4V3zm1 5a2 2 0 0 0-2 2v1H2a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v-1a2 2 0 0 0-2-2H5zm7 2v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1z"/>
                                                         </svg>
+                                                    </a>
+                                                    <a href="invoice.php?id=<?= $row->sale_id ?>" class="p-2" target="blank" title="print">
+                                                        
+                                                        print 
                                                     </a>
                                                 </td>
 
