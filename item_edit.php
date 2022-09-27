@@ -24,10 +24,10 @@ require_once 'inc/html_head.php';
         if(!isset($_GET['id']) or $_GET['id'] == ''){
             header('Location: item.php');
         }
-        $data = $con->query("SELECT tbl_item.item_id,
-                            tbl_item.item_name, tbl_brand.brand_name,
-                            tbl_category.category_name, tbl_item.current_stock,
-                            tbl_item.unit_price, tbl_item.item_description FROM ((tbl_item
+
+        $data = $con->query("SELECT tbl_item.*,
+                            tbl_brand.brand_name,
+                            tbl_category.category_name FROM ((tbl_item
                             INNER JOIN tbl_brand ON tbl_item.brand_id = tbl_brand.brand_id)
                             INNER JOIN tbl_category ON tbl_item.category_id = tbl_category.category_id) WHERE tbl_item.item_id = ". $_GET['id'])->fetch(PDO::FETCH_OBJ);
 
@@ -37,19 +37,20 @@ require_once 'inc/html_head.php';
             $category = $_POST['category'];
             $unit_price = $_POST['unit_price'];
             $description = $_POST['description'];
+            $item_id = $_GET['id'];
 
             if (empty($item_name) || empty($brand) || empty($category) || empty($unit_price)) {
                 echo '
-				<div class="alert alert-warning alert-dismissible fade show">
-					<strong>Message!</strong> Please input a correct data.
-					<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-				</div>
-			';
+                    <div class="alert alert-warning alert-dismissible fade show">
+                        <strong>Message!</strong> Please input a correct data.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                ';
             } else {
 
                 $sql = $con->prepare("UPDATE tbl_item SET item_name=?, brand_id=?,
-                                     category_id=?, unit_price=?, 
-                                     item_description=?  WHERE item_id = ? ");
+                    category_id=?, unit_price=?, 
+                    item_description=?  WHERE item_id = ?");
                 $sql->bindParam(1, $item_name);
                 $sql->bindParam(2, $brand);
                 $sql->bindParam(3, $category);
@@ -59,18 +60,26 @@ require_once 'inc/html_head.php';
 
                 if ($sql->execute()) {
                     echo '
-					<div class="alert alert-success alert-dismissible fade show">
-						<strong>Message!</strong> Update Data Success. Now you can back.
-						<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-					</div>
-				';
+                        <div class="alert alert-success alert-dismissible fade show">
+                            <strong>Message!</strong> Update Data Success. Now you can back.
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    ';
+
+                    // get data if updated
+                    $data = $con->query("SELECT tbl_item.*,
+                            tbl_brand.brand_name,
+                            tbl_category.category_name FROM ((tbl_item
+                            INNER JOIN tbl_brand ON tbl_item.brand_id = tbl_brand.brand_id)
+                            INNER JOIN tbl_category ON tbl_item.category_id = tbl_category.category_id) WHERE tbl_item.item_id = ". $_GET['id'])->fetch(PDO::FETCH_OBJ);
+
                 } else {
                     echo '
-					<div class="alert alert-danger alert-dismissible fade show">
-						<strong>Message!</strong> Error Insert Data, Some data is already exist.
-						<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-					</div>
-				';
+                        <div class="alert alert-danger alert-dismissible fade show">
+                            <strong>Message!</strong> Error Insert Data, Some data is already exist.
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    ';
                 }
             }
         }
@@ -86,7 +95,7 @@ require_once 'inc/html_head.php';
                     <div class="container bg-white p-3 mt-3 shadow p-3 mb-5 bg-body rounded-4">
                         <form action="#" method="post">
                             <div class="mb-3">
-                            <a href="item.php"​ title="Back">
+                            <a href="item.php" title="Back">
                                 <svg width="25" height="25" fill="green"
                                      class="bi bi-arrow-left-circle" viewBox="0 0 16 16">
                                     <path fill-rule="evenodd"
@@ -102,7 +111,8 @@ require_once 'inc/html_head.php';
                                 <div class="form-group col-md-6">
                                     <label for="form-select" class="form-label">Brand</label>
                                     <select name="brand" class="form-select">
-                                    <?php 
+                                        <option value="<?= $data->brand_id ?>" selected hidden><?= $data->brand_name ?></option>
+                                        <?php 
                                             $stmt = $con->query("SELECT * FROM tbl_brand");
                                             while($row = $stmt->fetch(PDO::FETCH_OBJ)):
                                         ?>
@@ -115,7 +125,8 @@ require_once 'inc/html_head.php';
                                 <div class="form-group col-md-6">
                                 <label for="form-select" class="form-label">Category</label>
                                     <select name="category" class="form-select">
-                                    <?php 
+                                        <option value="<?= $data->category_id ?>" selected hidden><?= $data->category_name ?></option>
+                                        <?php 
                                             $stmt = $con->query("SELECT * FROM tbl_category");
                                             while($row = $stmt->fetch(PDO::FETCH_OBJ)):
                                         ?>

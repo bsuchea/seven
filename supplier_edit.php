@@ -24,7 +24,11 @@ require_once 'inc/html_head.php';
         if(!isset($_GET['id']) or $_GET['id'] == ''){
             header('Location: suppliers.php');
         }
-        $data = $con->query("SELECT * FROM tbl_suppliers WHERE suppliers_id = ". $_GET['id'])->fetch(PDO::FETCH_OBJ);
+
+        $suppliersData = $con->prepare("SELECT * FROM tbl_suppliers WHERE suppliers_id = ?");
+        $suppliersData->bindParam(1, $_GET['id']);
+        $suppliersData->execute();
+        $suppliers_items = $suppliersData->fetch(PDO::FETCH_BOTH);
 
         if (isset($_POST['update_cus'])) {
             $name = $_POST['name'];
@@ -33,6 +37,7 @@ require_once 'inc/html_head.php';
             $phone = $_POST['phone'];
             $address = $_POST['address'];
             $updated_date = date('Y/m/d h:i:s a', time());
+            $suppliers_id = $_GET['id'];
 
             if (empty($name) || empty($gender) || empty($phone) || empty($email) || empty($address)) {
                 echo '
@@ -43,19 +48,25 @@ require_once 'inc/html_head.php';
 			';
             } else {
 
-                $sql = $con->prepare("UPDATE tbl_supplier SET WHERE ");
+                $sql = $con->prepare("UPDATE tbl_suppliers SET suppliers_name=?, suppliers_gender=?, suppliers_email=?, suppliers_phone=?, suppliers_address=?, status=? WHERE suppliers_id=?");
                 $sql->bindParam(1, $name);
                 $sql->bindParam(2, $gender);
                 $sql->bindParam(3, $email);
                 $sql->bindParam(4, $phone);
                 $sql->bindParam(5, $address);
-                $sql->bindParam(6, $updated_date);
-                $sql->bindParam(7, $status);
+                $sql->bindParam(6, $status);
+                $sql->bindParam(7, $suppliers_id);
 
                 if ($sql->execute()) {
+                    
+                    //get data if updated
+                    $suppliersData = $con->prepare("SELECT * FROM tbl_suppliers WHERE suppliers_id = ?");
+                    $suppliersData->bindParam(1, $_GET['id']);
+                    $suppliersData->execute();
+                    $suppliers_items = $suppliersData->fetch(PDO::FETCH_BOTH);
                     echo '
 					<div class="alert alert-success alert-dismissible fade show">
-						<strong>Message!</strong> Insert Data success. Now you can back.
+						<strong>Message!</strong> Updated Data Success. Now you can back.
 						<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 					</div>
 				';
@@ -92,31 +103,31 @@ require_once 'inc/html_head.php';
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="inputID">Full Name</label>
-                                    <input name="name" value="<?= $data->suppliers_name ?>" class="form-control" type="text" placeholder="Full Name">
+                                    <input name="name" value="<?= $suppliers_items['suppliers_name'] ?>" class="form-control" type="text" placeholder="Full Name">
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="form-select" class="form-label">Gender</label>
                                     <select name="gender" class="form-select">
-                                        <option value="Male" <?= $data->suppliers_gender=='Male'?'selected':'' ?>>Male</option>
-                                        <option value="Female" <?= $data->suppliers_gender=='Female'?'selected':'' ?>>Female</option>
+                                        <option value="Male" <?= $suppliers_items['suppliers_gender']=='Male'?'selected':'' ?>>Male</option>
+                                        <option value="Female" <?= $suppliers_items['suppliers_gender']=='Female'?'selected':'' ?>>Female</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label class="form-label">Email</label>
-                                    <input type="email" name="email" value="<?= $data->suppliers_email ?>" class="form-control" placeholder="Email">
+                                    <input type="email" name="email" value="<?= $suppliers_items['suppliers_email'] ?>" class="form-control" placeholder="Email">
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label class="form-label">Phone Number</label>
-                                    <input type="text" name="phone" value="<?= $data->suppliers_phone ?>" class="form-control" placeholder="Phone Number">
+                                    <input type="text" name="phone" value="<?= $suppliers_items['suppliers_phone'] ?>" class="form-control" placeholder="Phone Number">
                                 </div>
                             </div>
 
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label class="form-label">Address</label>
-                                    <input type="text" name="address" value="<?= $data->suppliers_address ?>" class="form-control" placeholder="Address">
+                                    <input type="text" name="address" value="<?= $suppliers_items['suppliers_address'] ?>" class="form-control" placeholder="Address">
                                 </div>
                             </div>
                             <div class="text-center mt-3">

@@ -1,4 +1,4 @@
-<div class="container-fluid py-2">
+<div class="container-fluid py-2 ">
             <div class="app-header-content">
                 <div class="row justify-content-between align-items-center">
 
@@ -11,9 +11,6 @@
                             </svg>
                         </a>
                     </div>
-
-                    <!-- ::: User Profile ::: -->
-
                     <div
                     ​ class="app-utilities col-auto">
                     <form action="#" method="post">

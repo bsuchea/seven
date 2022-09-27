@@ -43,10 +43,28 @@ require_once 'inc/html_head.php';
                             </button>
                             </div>
                     </div>
+
                     <div class="col-auto">
                         <div><br></div>
-                        <div> <input type="text" class="form-control" placeholder="Search..."></div>
+                        <div > 
+                            <form  action="#" method="GET" >
+                                <div class="d-flex">
 
+                              
+                                <input 
+
+                                value="<?php if(isset($_GET['seach'])){echo $_GET['search_str'];} else{$_GET['search_str']='';} ?>"
+                                
+                                name="search_str" type="text" class="form-control mr-2" placeholder="Search Name...">
+                                
+                                <button class="btn btn-sm btn-outline-success rounded-5" type="submit" name="seach">
+                                    <svg width="16" height="16" fill="currentColor" class="bi bi-search" viewB="0 0 16 16">
+                                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                                    </svg> Search</button> 
+                                </div>
+                            </form>
+                         </div>
+                     
                     </div>
                 </div>
                 <div class="tab-content" id="orders-table-tab-content">
@@ -78,7 +96,19 @@ require_once 'inc/html_head.php';
                                             $page = 1;
                                         }
                                         $start_from = ($page - 1) * $limit;
-                                        $sql_select = $con->prepare("SELECT * FROM tbl_user ORDER BY permission ASC LIMIT $start_from, $limit");
+
+                                        if(isset($_GET['seach'])){
+                                            if($_GET['search_str']==''){
+                                                $sql_select = $con->prepare("SELECT * FROM tbl_user ORDER BY permission ASC LIMIT $start_from, $limit");
+                                            }else{
+                                                $search_str = $_GET['search_str'];
+                                                $sql_select = $con->prepare("SELECT * FROM tbl_user WHERE user_fullname
+                                                LIKE '%".$_GET['search_str']."%' ORDER BY permission ASC LIMIT $start_from, $limit");
+                                            }
+                                        }else{
+                                            $sql_select = $con->prepare("SELECT * FROM tbl_user ORDER BY permission ASC LIMIT $start_from, $limit");
+                                        }
+                                        
 
                                         $sql_select->execute();
 
@@ -121,7 +151,7 @@ require_once 'inc/html_head.php';
                                                         </td>
                                                     <?php } ?> 
                                                 <td class="td-actions text-center">
-                                                    <a href="user_edit.php?id=<?= $row->user_id ?>" class="p-2">
+                                                    <a href="user_edit.php?id=<?= $row->user_id ?>" class="p-2" title="Edit User">
                                                         <svg width="20" height="20" fill="currentColor"
                                                              class="bi bi-pencil-square" viewBox="0 0 16 16">
                                                             <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
@@ -130,7 +160,7 @@ require_once 'inc/html_head.php';
                                                             Edit
                                                         </svg>
                                                     </a>
-                                                    <a href="#" class="text-danger" onclick="delUser(<?= $row->user_id ?>)" class="p-2">
+                                                    <a href="#" class="text-danger" onclick="delUser(<?= $row->user_id ?>)" class="p-2" title="Remove User">
                                                             <svg width="20" height="20" fill="currentColor" 
                                                              class="bi bi-person-x" viewBox="0 0 16 16">
                                                             <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>

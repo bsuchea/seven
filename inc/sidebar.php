@@ -101,6 +101,7 @@
 
                     <!-- Check Permission -->
                     <?php
+
                     $LogID = $_SESSION["Loged_id"];
                     $status = 1;
                 
@@ -115,6 +116,8 @@
                     $row_select_logedin = $sql_select_logedin->fetch(PDO::FETCH_BOTH);
                 
                     $_SESSION['Loged_permission'] = $row_select_logedin['permission'];
+                    //End
+
                     if ($row_select_logedin['permission'] == "Admin") {
                     ?>
                     <li class="nav-item">
@@ -160,6 +163,18 @@
                         </a>
                     </li>
                     <?php } ?>
+
+                    <li class="nav-item">
+                        <a class="nav-link <?= ($p=="low_stock")?'active':'' ?>" href="low_stock">
+						        <span class="nav-icon">
+								<svg width="16" height="16" fill="currentColor" class="bi bi-graph-down-arrow" viewB="0 0 16 16">
+                                <path fill-rule="evenodd" d="M0 0h1v15h15v1H0V0Zm10 11.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-4a.5.5 0 0 0-1 0v2.6l-3.613-4.417a.5.5 0 0 0-.74-.037L7.06 8.233 3.404 3.206a.5.5 0 0 0-.808.588l4 5.5a.5.5 0 0 0 .758.06l2.609-2.61L13.445 11H10.5a.5.5 0 0 0-.5.5Z"/>
+                                </svg>
+						         </span>
+                            <span class="nav-link-text">Low Stock</span>
+                            <span class="badge bg-danger text-white float-end">New</span>
+                        </a>
+                    </li>
                 </ul><!--//app-menu-->
             </nav><!--//app-nav-->
         </div><!--//sidepanel-inner-->

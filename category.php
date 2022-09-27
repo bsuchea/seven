@@ -55,8 +55,25 @@ require_once 'inc/html_head.php';
                     </div>
                     <div class="col-auto">
                         <div><br></div>
-                        <div> <input type="text" class="form-control" placeholder="Search..."></div>
+                        <div > 
+                            <form  action="#" method="GET" >
+                                <div class="d-flex">
 
+                              
+                                <input 
+
+                                value="<?php if(isset($_GET['seach'])){echo $_GET['search_str'];} else{$_GET['search_str']='';} ?>"
+                                
+                                name="search_str" type="text" class="form-control mr-2" placeholder="Search Category...">
+                                
+                                <button class="btn btn-sm btn-outline-success rounded-5" type="submit" name="seach">
+                                    <svg width="16" height="16" fill="currentColor" class="bi bi-search" viewB="0 0 16 16">
+                                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                                    </svg> Search</button> 
+                                </div>
+                            </form>
+                         </div>
+                     
                     </div>
                 </div>
                 <div class="tab-content" id="orders-table-tab-content">
@@ -84,7 +101,19 @@ require_once 'inc/html_head.php';
                                             $page = 1;
                                         }
                                         $start_from = ($page - 1) * $limit;
-                                        $sql_select = $con->prepare("SELECT * FROM tbl_category ORDER BY category_id ASC LIMIT $start_from, $limit");
+
+                                        if(isset($_GET['seach'])){
+                                            if($_GET['search_str']==''){
+                                                $sql_select = $con->prepare("SELECT * FROM tbl_category ORDER BY category_id ASC LIMIT $start_from, $limit");
+                                            }else{
+                                                $search_str = $_GET['search_str'];
+                                                $sql_select = $con->prepare("SELECT * FROM tbl_category WHERE category_name
+                                                LIKE '%".$_GET['search_str']."%' ORDER BY category_id ASC LIMIT $start_from, $limit");
+                                            }
+                                        }else{
+                                            $sql_select = $con->prepare("SELECT * FROM tbl_category ORDER BY category_id ASC LIMIT $start_from, $limit");
+                                        }
+
 
                                         $sql_select->execute();
 

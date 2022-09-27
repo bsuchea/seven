@@ -24,18 +24,26 @@ require_once 'inc/html_head.php';
         if(!isset($_GET['id']) or $_GET['id'] == ''){
             header('Location: user.php');
         }
-        $data = $con->query("SELECT * FROM tbl_user WHERE user_id = ". $_GET['id'])->fetch(PDO::FETCH_OBJ);
+        
+        $userData = $con->prepare("SELECT * FROM tbl_user WHERE user_id = ?");
+        $userData->bindParam(1, $_GET['id']);
+        $userData->execute();
+        $user_items = $userData->fetch(PDO::FETCH_BOTH);
+
 
         if (isset($_POST['update_user'])) {
-            $fullname = $_POST['user_fullname'];
-            $name = $_POST['user_name'];
-            $gender = $_POST['user_gender'];
-            $email = $_POST['user_email'];
-            $phone = $_POST['user_phone'];
-            $address = $_POST['user_address'];
+            $fullname = $_POST['fullname'];
+            $name = $_POST['name'];
+            $gender = $_POST['gender'];
+            $email = $_POST['email'];
+            $phone = $_POST['phone'];
+            $address = $_POST['address'];
+            $permission = $_POST['permission'];
+            $password = $_POST['password'];
             $updated_date = date('Y/m/d h:i:s a', time());
+            $user_id = $_GET['id'];
 
-            if (empty($name) || empty($gender) || empty($phone) || empty($email) || empty($address)) {
+            if (empty($fullname) || empty($name) || empty($gender) || empty($phone) || empty($email) || empty($address)) {
                 echo '
 				<div class="alert alert-warning alert-dismissible fade show">
 					<strong>Message!</strong> Please input a correct data.
@@ -44,20 +52,29 @@ require_once 'inc/html_head.php';
 			';
             } else {
 
-                $sql = $con->prepare("UPDATE tbl_user SET WHERE ");
+                $sql = $con->prepare("UPDATE tbl_user SET user_fullname=?, user_gender=?, user_email=?, user_name=?, user_password=?, user_address=?, user_phone=?, permission=?, status=? WHERE user_id=? ");
                 $sql->bindParam(1, $fullname);
-                $sql->bindParam(2, $name);
-                $sql->bindParam(3, $gender);
-                $sql->bindParam(4, $email);
-                $sql->bindParam(5, $phone);
+                $sql->bindParam(2, $gender);
+                $sql->bindParam(3, $email);
+                $sql->bindParam(4, $name);
+                $sql->bindParam(5, $password);
                 $sql->bindParam(6, $address);
-                $sql->bindParam(7, $created_date);
-                $sql->bindParam(8, $status);
+                $sql->bindParam(7, $phone);
+                $sql->bindParam(8, $permission);
+                $sql->bindParam(9, $status);
+                $sql->bindParam(10, $user_id);
 
                 if ($sql->execute()) {
+
+                     //get data if updated
+                    $userData = $con->prepare("SELECT * FROM tbl_user WHERE user_id = ?");
+                    $userData->bindParam(1, $_GET['id']);
+                    $userData->execute();
+                    $user_items = $userData->fetch(PDO::FETCH_BOTH);
+
                     echo '
 					<div class="alert alert-success alert-dismissible fade show">
-						<strong>Message!</strong> Insert Data success. Now you can back.
+						<strong>Message!</strong> Updated Data Success. Now you can back.
 						<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 					</div>
 				';
@@ -94,32 +111,32 @@ require_once 'inc/html_head.php';
                             <div class="form-row">
                                 <div class="form-group col-md-4">
                                     <label for="inputID">Full Name</label>
-                                    <input name="fullname" value="<?= $data->user_fullname ?>" class="form-control" type="text" placeholder="Full Name">
+                                    <input name="fullname" value="<?= $user_items['user_fullname'] ?>" class="form-control" type="text" placeholder="Full Name">
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label for="inputID">Username</label>
-                                    <input name="name" value="<?= $data->user_name ?>" class="form-control" type="text" placeholder="Username">
+                                    <input name="name" value="<?= $user_items['user_name'] ?>" class="form-control" type="text" placeholder="Username">
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label for="form-select" class="form-label">Gender</label>
                                     <select name="gender" class="form-select">
-                                        <option value="Male" <?= $data->user_gender=='Male'?'selected':'' ?>>Male</option>
-                                        <option value="Female" <?= $data->user_gender=='Female'?'selected':'' ?>>Female</option>
+                                        <option value="Male" <?= $user_items['user_gender']=='Male'?'selected':'' ?>>Male</option>
+                                        <option value="Female" <?= $user_items['user_gender']=='Female'?'selected':'' ?>>Female</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-4">
                                     <label class="form-label">Email</label>
-                                    <input type="email" name="email" value="<?= $data->user_email ?>" class="form-control" placeholder="Email">
+                                    <input type="email" name="email" value="<?= $user_items['user_email'] ?>" class="form-control" placeholder="Email">
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label class="form-label">Phone Number</label>
-                                    <input type="text" name="phone" value="<?= $data->user_phone ?>" class="form-control" placeholder="Phone Number">
+                                    <input type="text" name="phone" value="<?= $user_items['user_phone'] ?>" class="form-control" placeholder="Phone Number">
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label class="form-label">Address</label>
-                                    <input type="text" name="address" value="<?= $data->user_address ?>" class="form-control" placeholder="Address">
+                                    <input type="text" name="address" value="<?= $user_items['user_address'] ?>" class="form-control" placeholder="Address">
                                 </div>
                             </div>
 
@@ -127,14 +144,14 @@ require_once 'inc/html_head.php';
                             <div class="form-group col-md-6">
                             <label for="form-select" class="form-label">Permission</label>
                                     <select name="permission" class="form-select">
-                                        <option value="Admin" <?= $data->permission=='Admin'?'selected':'' ?>>Admin</option>
-                                        <option value="User" <?= $data->permission=='User'?'selected':'' ?>>User</option>
-                                        <option value="Vendor" <?= $data->permission=='Vendor'?'selected':'' ?>>Vendor</option>
+                                        <option value="Admin" <?= $user_items['permission']=='Admin'?'selected':'' ?>>Admin</option>
+                                        <option value="User" <?= $user_items['permission']=='User'?'selected':'' ?>>User</option>
+                                        <option value="Vendor" <?= $user_items['permission']=='Vendor'?'selected':'' ?>>Vendor</option>
                                     </select>
                             </div>
                             <div class="form-group col-md-6">
                                     <label class="form-label">Password</label>
-                                    <input type="password" name="password" value="<?= $data->user_password ?>" class="form-control" placeholder="Password">
+                                    <input type="password" name="password" value="<?= $user_items['user_password'] ?>" class="form-control" placeholder="Password">
                                 </div>
                             </div>
                             <div class="text-center mt-3">

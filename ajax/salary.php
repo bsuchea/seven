@@ -4,15 +4,19 @@ require_once '../config/db.php';
 
 try{
 
-    $supplier =  $_GET['em'];
+    $vendor =  $_GET['vn'];
     $date = $_GET['d'];
-    $total = $_GET['t'];
+    $salary = $_GET['sa'];
+    $bonus = $_GET['bn'];
+    $description = $_GET['des'];
     $items = $_GET['items'];
     
-    $query = $con->prepare("INSERT INTO tbl_purchase VALUES(null, ?, ?, ?)");
-    $query->bindParam(1, $total);
-    $query->bindParam(2, $date);
-    $query->bindParam(3, $supplier);
+    $query = $con->prepare("INSERT INTO tbl_salary VALUES(?, ?, ?, ?, ?)");
+    $query->bindParam(1, $vendor);
+    $query->bindParam(2, $salary);
+    $query->bindParam(3, $bonus);
+    $query->bindParam(4, $date);
+    $query->bindParam(5, $description);
     $query->execute();
 
     $pid = $con->lastInsertId();
@@ -30,7 +34,7 @@ try{
         $q2->execute();
     }
 
-    echo 'Purchase Successfully!';
+    echo 'success';
     
 } catch (PDOException $e) {
     echo $e->getMessage();

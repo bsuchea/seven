@@ -24,13 +24,19 @@ require_once 'inc/html_head.php';
         if(!isset($_GET['id']) or $_GET['id'] == ''){
             header('Location: category.php');
         }
-        $data = $con->query("SELECT * FROM tbl_category WHERE category_id = ". $_GET['id'])->fetch(PDO::FETCH_OBJ);
+        
+        $categoryData = $con->prepare("SELECT * FROM tbl_category WHERE category_id = ?");
+        $categoryData->bindParam(1, $_GET['id']);
+        $categoryData->execute();
+        $category_items = $categoryData->fetch(PDO::FETCH_BOTH);
 
         if (isset($_POST['update_category'])) {
             $category_name = $_POST['category_name'];
             $description = $_POST['description'];
+            $category_id = $_GET['id'];
 
             if (empty($category_name)) {
+
                 echo '
 				<div class="alert alert-warning alert-dismissible fade show">
 					<strong>Message!</strong> Please input a correct data.
@@ -39,14 +45,21 @@ require_once 'inc/html_head.php';
 			';
             } else {
 
-                $sql = $con->prepare("UPDATE tbl_category SET WHERE ");
+                $sql = $con->prepare("UPDATE tbl_category SET category_name=?, description=? WHERE category_id=? ");
                 $sql->bindParam(1, $category_name);
                 $sql->bindParam(2, $description);
+                $sql->bindParam(3, $category_id);
 
                 if ($sql->execute()) {
+
+                    //get data if updated
+                    $categoryData = $con->prepare("SELECT * FROM tbl_category WHERE category_id = ?");
+                    $categoryData->bindParam(1, $_GET['id']);
+                    $categoryData->execute();
+                    $category_items = $categoryData->fetch(PDO::FETCH_BOTH);
                     echo '
 					<div class="alert alert-success alert-dismissible fade show">
-						<strong>Message!</strong> Update Data Success.
+						<strong>Message!</strong> Updated Data Success.
 						<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 					</div>
 				';
@@ -83,11 +96,11 @@ require_once 'inc/html_head.php';
                         <div class="row  text-center">
                             <div class="col-md-6 mb-3 mt-3">
                                 <label class="form-label">Category Name</label>
-                                <input type="text" value="<?= $data->category_name ?>" name="category_name" class="form-control" placeholder="Category Name">
+                                <input type="text" value="<?= $category_items['category_name'] ?>" name="category_name" class="form-control" placeholder="Category Name">
                             </div>
                             <div class="col-md-6 mb-3 mt-3">
                                 <label class="form-label">Description or Notes</label>
-                                <textarea name="description" class="form-control" rows="10" cols="10" value="<?= $data->description ?>"></textarea>
+                                <input type="text" value="<?= $category_items['description'] ?>" name="description" class="form-control" placeholder="Description">
                             </div>
                         </div>
                         <div class="mt-2 text-center">

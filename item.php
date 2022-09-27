@@ -22,6 +22,7 @@ require_once 'inc/html_head.php';
         <?php if (isset($_SESSION['res'])) {
             echo $_SESSION['res'];
             unset($_SESSION['res']);
+           
         } ?>
         <div class="container-xl">
             <div class="position-relative mb-3">
@@ -41,12 +42,32 @@ require_once 'inc/html_head.php';
                             </button>
                             </div>
                     </div>
+
                     <div class="col-auto">
                         <div><br></div>
-                        <div> <input type="text" class="form-control" placeholder="Search..."></div>
+                        <div > 
+                            <form  action="#" method="GET" >
+                                <div class="d-flex">
 
+                              
+                                <input 
+
+                                value="<?php if(isset($_GET['seach'])){echo $_GET['search_str'];} else{$_GET['search_str']='';} ?>"
+                                
+                                name="search_str" type="text" class="form-control mr-2" placeholder="Search Product Name...">
+                                
+                                <button class="btn btn-sm btn-outline-success rounded-5" type="submit" name="seach">
+                                    <svg width="16" height="16" fill="currentColor" class="bi bi-search" viewB="0 0 16 16">
+                                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                                    </svg> Search</button> 
+                                </div>
+
+                            </form>
+                         </div>
+                     
                     </div>
                 </div>
+  
                 <div class="tab-content" id="orders-table-tab-content">
                     <div class="tab-pane fade show active" id="orders-all" role="tabpanel"
                          aria-labelledby="orders-all-tab">
@@ -67,7 +88,7 @@ require_once 'inc/html_head.php';
                                             <th class="cell text-center">Action</th>
                                         </tr>
                                         </thead>
-
+                 
                                         <tbody>
                                         <?php
                                         $limit = 10;
@@ -77,15 +98,50 @@ require_once 'inc/html_head.php';
                                             $page = 1;
                                         }
                                         $start_from = ($page - 1) * $limit;
+
+                                        if(isset($_GET['seach']))
+                                        {
+                                            if($_GET['search_str']=='')
+                                            {
+                                                $sql_select = $con->prepare("SELECT tbl_item.item_id,
+                                                tbl_item.item_name, tbl_brand.brand_name as brand_name,
+                                                tbl_category.category_name as category_name, tbl_item.current_stock,
+                                                tbl_item.unit_price, tbl_item.created_date, tbl_item.item_description FROM ((tbl_item
+                                                INNER JOIN tbl_brand ON tbl_item.brand_id = tbl_brand.brand_id)
+                                                INNER JOIN tbl_category ON tbl_item.category_id = tbl_category.category_id) ORDER BY item_id ASC LIMIT $start_from, $limit");
+        
+                         
+                                            }else
+                                            {
+                                                $search_str = $_GET['search_str'];
+                                                $sql_select = $con->prepare("SELECT tbl_item.item_id,
+                                                tbl_item.item_name, tbl_brand.brand_name as brand_name,
+                                                tbl_category.category_name as category_name, tbl_item.current_stock,
+                                                tbl_item.unit_price, tbl_item.created_date, tbl_item.item_description FROM ((tbl_item
+                                                INNER JOIN tbl_brand ON tbl_item.brand_id = tbl_brand.brand_id)
+                                                INNER JOIN tbl_category ON tbl_item.category_id = tbl_category.category_id) 
+                                                WHERE tbl_item.item_name LIKE '%".$_GET['search_str']."%' ORDER BY item_id ASC LIMIT $start_from, $limit ");
+                                            }
+                                     
+                                   
+                                        }else
+                                        {
                                         $sql_select = $con->prepare("SELECT tbl_item.item_id,
-                                                                    tbl_item.item_name, tbl_brand.brand_name as brand_name,
-                                                                    tbl_category.category_name as category_name, tbl_item.current_stock,
-                                                                    tbl_item.unit_price, tbl_item.created_date, tbl_item.item_description FROM ((tbl_item
-                                                                    INNER JOIN tbl_brand ON tbl_item.brand_id = tbl_brand.brand_id)
-                                                                    INNER JOIN tbl_category ON tbl_item.category_id = tbl_category.category_id) ORDER BY item_id ASC LIMIT $start_from, $limit");
+                                        tbl_item.item_name, tbl_brand.brand_name as brand_name,
+                                        tbl_category.category_name as category_name, tbl_item.current_stock,
+                                        tbl_item.unit_price, tbl_item.created_date, tbl_item.item_description FROM ((tbl_item
+                                        INNER JOIN tbl_brand ON tbl_item.brand_id = tbl_brand.brand_id)
+                                        INNER JOIN tbl_category ON tbl_item.category_id = tbl_category.category_id) ORDER BY item_id ASC LIMIT $start_from, $limit");
+                                        }
+                                    //     $sql_select = $con->prepare("SELECT tbl_item.item_id,
+                                    //     tbl_item.item_name, tbl_brand.brand_name as brand_name,
+                                    //     tbl_category.category_name as category_name, tbl_item.current_stock,
+                                    //     tbl_item.unit_price, tbl_item.created_date, tbl_item.item_description FROM ((tbl_item
+                                    //     INNER JOIN tbl_brand ON tbl_item.brand_id = tbl_brand.brand_id)
+                                    //     INNER JOIN tbl_category ON tbl_item.category_id = tbl_category.category_id) ORDER BY item_id ASC LIMIT $start_from, $limit");
 
-                                        $sql_select->execute();
-
+                                      $sql_select->execute();
+                 
                                         $i = 0;
 
                                         while ($row = $sql_select->fetch(PDO::FETCH_OBJ)) :
@@ -97,7 +153,7 @@ require_once 'inc/html_head.php';
                                                 <td><?= $row->brand_name ?></td>
                                                 <td><?= $row->category_name ?></td>
                                                 <td><?= $row->current_stock ?></td>
-                                                <td>$<?= $row->unit_price ?></td>
+                                                <td><?= $row->unit_price ?>$</td>
                                                 <td><?= $row->created_date ?></td>
                                                 <td><?= $row->item_description ?></td>
                                                 <td class="td-actions text-center">
@@ -141,28 +197,29 @@ require_once 'inc/html_head.php';
                                 </div><!--//table-responsive-->
                                 <?php
                                 $query = $con->query("SELECT tbl_item.item_id,
-                                                    tbl_item.item_name, tbl_brand.brand_name,
-                                                    tbl_category.category_name, tbl_item.current_stock,
-                                                    tbl_item.unit_price FROM ((tbl_item
-                                                    INNER JOIN tbl_brand ON tbl_item.brand_id = tbl_brand.brand_id)
-                                                    INNER JOIN tbl_category ON tbl_item.category_id = tbl_category.category_id)");
+                                                tbl_item.item_name, tbl_brand.brand_name as brand_name,
+                                                tbl_category.category_name as category_name, tbl_item.current_stock,
+                                                tbl_item.unit_price, tbl_item.created_date, tbl_item.item_description FROM ((tbl_item
+                                                INNER JOIN tbl_brand ON tbl_item.brand_id = tbl_brand.brand_id)
+                                                INNER JOIN tbl_category ON tbl_item.category_id = tbl_category.category_id) 
+                                                WHERE tbl_item.item_name LIKE '%".$_GET['search_str']."%' ");
                                 $total_records = $query->rowCount();
                                 $total_pages = ceil($query->rowCount() / $limit);
                                 ?>
                                 <nav class="app-pagination mt-4">
                                     <ul class="pagination justify-content-center">
                                         <li class="page-item <?= $page == 1 ? 'disabled' : '' ?> ">
-                                            <a class="page-link" href="item.php?page=<?= $page - 1 ?>"
+                                            <a class="page-link" href="item.php?page=<?= $page - 1 ?>&search_str=<?php echo $_GET['search_str']?>&seach=#"
                                                tabindex="-1"
                                                aria-disabled="true">Previous</a>
                                         </li>
                                         <?php for ($i = 1; $i <= $total_pages; $i++): ?>
-                                            <li class="page-item active"><a class="page-link"
-                                                                            href="item.php?page=<?= $i ?>"><?= $i ?></a>
+                                            <li class="page-item <?php if($page==$i) echo 'active'?>"><a class="page-link"
+                                                                            href="item.php?page=<?= $i ?>&search_str=<?php echo $_GET['search_str']?>&seach=#"><?= $i ?></a>
                                             </li>
                                         <?php endfor; ?>
                                         <li class="page-item <?= $page == $total_pages ? 'disabled' : '' ?> ">
-                                            <a class="page-link" href="item.php?page=<?= $page + 1 ?>">Next</a>
+                                            <a class="page-link" href="item.php?page=<?= $page + 1 ?>&search_str=<?php echo $_GET['search_str']?>&seach=#">Next</a>
                                         </li>
                                     </ul>
                                 </nav><!--//app-pagination-->

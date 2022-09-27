@@ -11,7 +11,7 @@ include_once ("config/db.php");
 <!DOCTYPE html>
 <html lang="en"> 
 <head>
-    <title>Se7en Esport Management System</title>
+    <title>Se7en Esport Management</title>
     
     <!-- Meta -->
     <meta charset="utf-8">

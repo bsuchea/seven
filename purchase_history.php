@@ -44,8 +44,25 @@ require_once 'inc/html_head.php';
                     </div>
                     <div class="col-auto">
                         <div><br></div>
-                        <div> <input type="text" class="form-control" placeholder="Search..."></div>
+                        <div > 
+                            <form  action="#" method="GET" >
+                                <div class="d-flex">
 
+                              
+                                <input 
+
+                                value="<?php if(isset($_GET['seach'])){echo $_GET['search_str'];} else{$_GET['search_str']='';} ?>"
+                                
+                                name="search_str" type="text" class="form-control mr-2" placeholder="Search Suppliers...">
+                                
+                                <button class="btn btn-sm btn-outline-success rounded-5" type="submit" name="seach">
+                                    <svg width="16" height="16" fill="currentColor" class="bi bi-search" viewB="0 0 16 16">
+                                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                                    </svg> Search</button> 
+                                </div>
+                            </form>
+                         </div>
+                     
                     </div>
                 </div>
                 <div class="tab-content" id="orders-table-tab-content">
@@ -74,10 +91,26 @@ require_once 'inc/html_head.php';
                                             $page = 1;
                                         }
                                         $start_from = ($page - 1) * $limit;
-                                        $sql_select = $con->prepare("SELECT tbl_purchase.purchase_id, tbl_purchase.purchase_total,
-                                                                    tbl_purchase.purchase_date, tbl_suppliers.suppliers_name as suppliers_name
-                                                                    FROM (tbl_purchase INNER JOIN tbl_suppliers ON tbl_suppliers.suppliers_id = tbl_purchase.suppliers_id) 
-                                                                    ORDER BY purchase_id ASC LIMIT $start_from, $limit");
+
+                                        if(isset($_GET['seach'])){
+                                            if($_GET['search_str']==''){
+                                                $sql_select = $con->prepare("SELECT tbl_purchase.purchase_id, tbl_purchase.purchase_total,
+                                                tbl_purchase.purchase_date, tbl_suppliers.suppliers_name as suppliers_name
+                                                FROM (tbl_purchase INNER JOIN tbl_suppliers ON tbl_suppliers.suppliers_id = tbl_purchase.suppliers_id) 
+                                                ORDER BY purchase_id ASC LIMIT $start_from, $limit");
+                                            }else{
+                                                $search_str = $_GET['search_str'];
+                                                $sql_select = $con->prepare("SELECT tbl_purchase.purchase_id, tbl_purchase.purchase_total,
+                                                tbl_purchase.purchase_date, tbl_suppliers.suppliers_name as suppliers_name
+                                                FROM (tbl_purchase INNER JOIN tbl_suppliers ON tbl_suppliers.suppliers_id = tbl_purchase.suppliers_id) 
+                                                WHERE tbl_suppliers.suppliers_name LIKE '%".$_GET['search_str']."%' ORDER BY purchase_id ASC LIMIT $start_from, $limit");
+                                            }
+                                            }else{
+                                                $sql_select = $con->prepare("SELECT tbl_purchase.purchase_id, tbl_purchase.purchase_total,
+                                                tbl_purchase.purchase_date, tbl_suppliers.suppliers_name as suppliers_name
+                                                FROM (tbl_purchase INNER JOIN tbl_suppliers ON tbl_suppliers.suppliers_id = tbl_purchase.suppliers_id) 
+                                                ORDER BY purchase_id ASC LIMIT $start_from, $limit");
+                                        }
 
                                         $sql_select->execute();
 
@@ -92,11 +125,17 @@ require_once 'inc/html_head.php';
                                                 <td><?= $row->purchase_total ?>$</td>
                                                 <td><?= $row->purchase_date ?></td>
                                                 <td class="td-actions text-center">
-                                                    <a href="view_purchase.php?id=<?= $row->purchase_id ?>" class="p-2" title="View Detail">
-                                                        <svg  width="20" height="20" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
-                                                        <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"/>
-                                                        <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>
-                                                        View </svg>
+                                                    <a href="view_purchase.php?id=<?= $row->purchase_id ?>" class="ml-1" title="View Detail">
+                                                        <svg width="20" height="20" fill="green" class="bi bi-card-text" viewB="0 0 16 16">
+                                                        <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
+                                                        <path d="M3 5.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zM3 8a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9A.5.5 0 0 1 3 8zm0 2.5a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5z"/>
+                                                        </svg>
+                                                    </a>
+                                                    <a href="#" id="print_purchase" title="Print">
+                                                        <svg width="20" height="20" fill="green" class="bi bi-printer" viewB="0 0 16 16">
+                                                        <path d="M2.5 8a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1z"/>
+                                                        <path d="M5 1a2 2 0 0 0-2 2v2H2a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h1v1a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-1h1a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-1V3a2 2 0 0 0-2-2H5zM4 3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2H4V3zm1 5a2 2 0 0 0-2 2v1H2a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v-1a2 2 0 0 0-2-2H5zm7 2v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1z"/>
+                                                        </svg>
                                                     </a>
                                                 </td>
 
