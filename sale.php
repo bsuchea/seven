@@ -178,7 +178,7 @@ require_once 'inc/html_head.php';
             cache: false,
             data: {items: items,tol: total, b: b, bp: bp, d: date},
             success: function(res){
-                if(res == 'success'){
+                if(res){
                     // success
                     $('#item_name').val('');
                     $('#sale_qty').val('');
@@ -194,9 +194,9 @@ require_once 'inc/html_head.php';
                     bp = '';
                     items = new Array();
                     total = 0;
+                    window.open('invoice.php?id=' + res, '_blank').focus();
                 }
-                console.log('working!');
-                Swal.fire(res, '', 'success');
+                
             }, error: function(e){
                 console.log(e.responseText); 
             }
