@@ -139,15 +139,15 @@ require_once 'inc/html_head.php';
                 
                     </div>
 
-                    <div class="mt-4">
+                    <div class="mt-4" style="font-family: 'Kantumruy Pro ExtraLight'">
 
                         <!-- table -->
                         <div class="row text-600 text-black bgc-default-tp1 py-25 bg-info border border-info rounded-3 p-3">
                             <div class="d-none d-sm-block col-1">#</div>
-                            <div class="col-9 col-sm-5">Product Name</div>
-                            <div class="d-none d-sm-block col-4 col-sm-2">Qty</div>
-                            <div class="d-none d-sm-block col-sm-2">Unit Price</div>
-                            <div class="col-2">Amount</div>
+                            <div class="col-9 col-sm-5">ឈ្មោះទំនិញ</div>
+                            <div class="d-none d-sm-block col-4 col-sm-2">ចំនួន</div>
+                            <div class="d-none d-sm-block col-sm-2">តម្លៃ</div>
+                            <div class="col-2">សរុប</div>
                         </div>
 
                         <div class="text-95 text-secondary-d3">
@@ -172,7 +172,7 @@ require_once 'inc/html_head.php';
                             <div class="col-5 col-sm-3 text-grey text-90 order-first order-sm-last border border-info rounded-3 bg-info">
                                 <strong><div class="row my-2">
                                     <div class="col-7 text-right">
-                                        Total Quantity
+                                        ទំនិញសរុប
                                     </div>
                                     <div class="col-5">
                                         <span class="text-120 text-secondary-d1"><?= $totalQTY ?></span>
@@ -181,7 +181,7 @@ require_once 'inc/html_head.php';
 
                                 <strong><div class="row my-2 align-items-center bgc-primary-l3 p-1">
                                     <div class="col-7 text-right">
-                                        Total Amount
+                                        តម្លៃសរុប
                                     </div>
                                     <div class="col-5">
                                         <span class="text-150 text-success-d3 opacity-2">$<?= $totalAmount ?></span>
