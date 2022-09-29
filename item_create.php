@@ -121,11 +121,11 @@ require_once 'inc/html_head.php';
                             <div class="form-row">
                                 <div class="form-group col-md-4">
                                     <label class="form-label">Quantity</label>
-                                    <input type="number" name="current_stock" class="form-control" placeholder="Quantity" required>
+                                    <input type="number" name="current_stock" class="form-control" min="1" placeholder="Quantity" required>
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label class="form-label">Unit Price</label>
-                                    <input type="text" name="unit_price" class="form-control" placeholder="Unit Price" required>
+                                    <input type="text" name="unit_price" class="form-control" min="1" placeholder="Unit Price" required>
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label class="form-label">Created Date</label>

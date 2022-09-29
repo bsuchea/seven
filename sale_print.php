@@ -34,7 +34,7 @@ require_once 'inc/html_head.php';
                 
         // if has sale id
         if (!isset($_GET['id']) or $_GET['id'] == '') {
-            header('Location: sale_report.php');
+            header('Location: sale.php');
         }
 
         // variable
