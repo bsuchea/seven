@@ -180,21 +180,27 @@ require_once 'inc/html_head.php';
             success: function(res){
                 if(res){
                     // success
+                    // $('#item_name').val('');
+                    // $('#sale_qty').val('');
+                    // $("#total").text("");
+                    // $("#tblproduct tbody").text("");
+                    // $('#buyer_name').val('');
+                    // $('#buyer_phone').val('');
+                    // pid = '';
+                    // pname = '';
+                    // punit = '';
+                    // pqty = '';
+                    // b = '';
+                    // bp = '';
+                    // items = new Array();
+                    // total = 0;
+                    
                     $('#item_name').val('');
                     $('#sale_qty').val('');
-                    $("#total").text("");
-                    $("#tblproduct tbody").text("");
-                    $('#buyer_name').val('');
-                    $('#buyer_phone').val('');
-                    pid = '';
-                    pname = '';
-                    punit = '';
-                    pqty = '';
-                    b = '';
                     bp = '';
                     items = new Array();
                     total = 0;
-                    window.open('sale_print.php?id=' + res, '_blank').focus();
+                    window.open('invoice.php?id=' + res, '_blank').focus();
                 }
                 
             }, error: function(e){

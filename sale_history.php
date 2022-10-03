@@ -75,8 +75,8 @@ require_once 'inc/html_head.php';
                                         <thead>
                                         <tr>
                                             <th class="cell text-center">#</th>
-                                            <th class="cell">Date</th>
                                             <th class="cell">Buyer Name</th>
+                                            <th class="cell">Buyer Phone</th>
                                             <th class="cell">Sale Total</th>
                                             <th class="cell">Sale Date</th>
                                             <th class="cell text-center">Action</th>
@@ -114,10 +114,10 @@ require_once 'inc/html_head.php';
                                             ?>
                                             <tr id="item<?= $row->sale_id ?>">
                                                 <td class="text-center"><?= $row->sale_id ?></td>
-                                                <td><?= $row->sale_date ?></td>
                                                 <td><?= $row->buyer_name ?></td>
                                                 <td><?= $row->buyer_phone ?></td>
                                                 <td><?= $row->sale_cost ?>$</td>
+                                                <td><?= $row->sale_date ?></td>
                                                 <td class="td-actions text-center">
                                                     <a href="view_sale.php?id=<?= $row->sale_id ?>" class="ml-1" title="View Detail">
                                                         <svg width="20" height="20" fill="green" class="bi bi-card-text" viewB="0 0 16 16">
@@ -138,8 +138,9 @@ require_once 'inc/html_head.php';
                                         </tbody>
                                         <tfoot>
                                         <tr>
-                                            <th class="cell text-center">#</th>
+                                        <th class="cell text-center">#</th>
                                             <th class="cell">Buyer Name</th>
+                                            <th class="cell">Buyer Phone</th>
                                             <th class="cell">Sale Total</th>
                                             <th class="cell">Sale Date</th>
                                             <th class="cell text-center">Action</th>
