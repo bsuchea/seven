@@ -26,12 +26,12 @@ require_once 'inc/html_head.php';
             <div class="app-card alert alert-dismissible shadow-sm mb-4 border-left-decoration" role="alert">
                 <div class="inner">
                     <div class="app-card-body p-3 p-lg-1">
-                        <h4 style="font-family: 'Kantumruy Pro ExtraLight';" class="mb-2">សូមស្វាគមន៍</h4>
+                        <strong><h4 style="font-family: 'Kantumruy Pro ExtraLight';" class="mb-2">សូមស្វាគមន៍</h4></strong>
                         <div class="row gx-5 gy-3">
                             <div class="col-12 col-lg-12">
-                                <div style="font-family: 'Kantumruy Pro ExtraLight'">មកកាន់ប្រព័ន្ធគ្រប់គ្រងហាង​ Se7eN Esport
+                                <strong><div style="font-family: 'Kantumruy Pro ExtraLight'">មកកាន់ប្រព័ន្ធគ្រប់គ្រងហាង​ Se7eN Esport
                                     ដែលប្រព័ន្ធគ្រប់គ្រងនេះត្រូវបានបង្កើតឡើងក្នុងគោលបំណងបំពេញតម្រូវការរបស់ហាង
-                                </div>
+                                </div></strong>
                             </div><!--//col-->
                         </div><!--//row-->
                         <!-- <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button> -->
@@ -40,6 +40,9 @@ require_once 'inc/html_head.php';
 
                 </div><!--//inner-->
             </div><!--//app-card-->
+
+            <?php include('contents/column_view.php'); ?>
+
             <?php include('contents/slide.php'); ?>
         </div><!--//container-fluid-->
     </div><!--//app-content-->

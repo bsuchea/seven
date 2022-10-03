@@ -64,11 +64,11 @@ require_once 'inc/html_head.php';
                                     </select>
                                 </div>
                                 <div class="form-group col-md-4">
-                                    <label for="form-select" class="form-label">Salary ($)</label>
+                                    <label for="form-select" class="form-label">Salary($)</label>
                                     <input type="text" name="salary" id="salary" min="1" class="form-control" placeholder="Salary">
                                 </div>
                                 <div class="form-group col-md-4">
-                                    <label for="form-select" class="form-label">Bonus ($)</label>
+                                    <label for="form-select" class="form-label">Bonus($)</label>
                                     <input type="text" name="bonus" id="bonus" min="1" class="form-control" placeholder="Bonus">
                                 </div>
                             </div>
@@ -103,8 +103,8 @@ require_once 'inc/html_head.php';
                                         <thead>
                                             <tr>
                                                 <th class="cell">Vendor Name</th>
-                                                <th class="cell">Salary ($)</th>
-                                                <th class="cell">Bonus ($)</th>
+                                                <th class="cell">Salary($)</th>
+                                                <th class="cell">Bonus($)</th>
                                                 <th class="cell">Date</th>
                                                 <th class="cell">Description or Notes</th>
                                             </tr>
