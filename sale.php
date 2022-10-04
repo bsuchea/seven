@@ -163,44 +163,44 @@ require_once 'inc/html_head.php';
 
         $("#total").text(total);
 
-        console.log('d: ' + JSON.stringify(items));
         return false;
     });
         
     $("#btnSale").click(function(){
-        b = $('#buyer_name').val();
+        buyer_name = $('#buyer_name').val();
         bp = $('#buyer_phone').val();
         date = $("#sale_date").val();
-        if(b =='') {errmsg('Please input Buyer Name!'); return false;}
+        if(buyer_name =='') {errmsg('Please input Buyer Name!'); return false;}
         if(bp =='') {errmsg('Please input Buyer Phone!'); return false;}
         $.ajax({
             url: 'ajax/sale.php',
             cache: false,
-            data: {items: items,tol: total, b: b, bp: bp, d: date},
+            data: {items: items,tol: total, buyer_name: buyer_name, bp: bp, d: date},
             success: function(res){
                 if(res){
                     // success
-                    // $('#item_name').val('');
-                    // $('#sale_qty').val('');
-                    // $("#total").text("");
-                    // $("#tblproduct tbody").text("");
-                    // $('#buyer_name').val('');
-                    // $('#buyer_phone').val('');
-                    // pid = '';
-                    // pname = '';
-                    // punit = '';
-                    // pqty = '';
-                    // b = '';
-                    // bp = '';
-                    // items = new Array();
-                    // total = 0;
+                    $('#item_name').val('');
+                    $('#sale_qty').val('');
+                    $("#total").text("");
+                    $("#tblproduct tbody").text("");
+                    $('#buyer_name').val('');
+                    $('#buyer_phone').val('');
+                    pid = '';
+                    pname = '';
+                    punit = '';
+                    pqty = '';
+                    buyer_name = '';
+                    bp = '';
+                    items = new Array();
+                    total = 0;
                     
                     $('#item_name').val('');
                     $('#sale_qty').val('');
                     bp = '';
                     items = new Array();
                     total = 0;
-                    window.open('invoice.php?id=' + res, '_blank').focus();
+                    console.log(res);
+                    window.open('sale_print.php?id=' + res, '_blank').focus();
                 }
                 
             }, error: function(e){

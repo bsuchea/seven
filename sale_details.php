@@ -211,9 +211,3 @@ require_once 'inc/html_head.php';
 </body>
 
 </html>
-
-<script type="text/javascript">
- window.print();
-    window.onafterprint = function () { window.close(); }
-    
-</script>
