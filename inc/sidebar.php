@@ -137,7 +137,7 @@
                     <!-- End Check Permission -->
 
                     <li class="nav-item">
-                        <a class="nav-link <?= ($p=="reports" || $p=="salary_report" || $p=="sale_report" || $p=="purchase_report" || $p=="sale_earn_dailyday" || $p=="sale_earn_dailyweek" || $p=="sale_earn_dailymonth")?'active':'' ?>" href="reports.php">
+                        <a class="nav-link <?= ($p=="reports" || $p=="salary_report" || $p=="sale_report" || $p=="purchase_report" || $p=="sale_earn_dailyday" || $p=="sale_earn_dailyweek" || $p=="sale_earn_dailymonth" || $p=="earning_report")?'active':'' ?>" href="reports.php">
 						        <span class="nav-icon">
 						        	<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-files"
                                          fill="currentColor" >

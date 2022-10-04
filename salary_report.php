@@ -25,26 +25,44 @@ require_once 'inc/html_head.php';
         } ?>
         <div class="container-xl">
             <div class="position-relative mb-3">
-                <div class="row g-2 justify-content-between mb-1">
+                <div class="row g-2 justify-content-between mb-2">
                     <div class="col-auto">
                         <h1 style="font-family: 'Kantumruy Pro ExtraLight'; color:#15a362; font-size:large"
                             class="app-page-title mb-3">ទំព័ររបាយការណ៍ប្រាក់បៀរវត្ស</h1>
-                            <div class="mb-2">
+                                  
+                            <!-- print and excel -->
+                            <div>
                             <button class="btn btn-sm btn-success rounded-5">
-                            <a style="color: white; text-decoration: none;" href="user_create.php" title="Add New">
-                                <svg width="16" height="16" fill="white" class="bi bi-person-plus"
-                                     viewBox="0 0 16 16">
-                                    <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
-                                    <path fill-rule="evenodd"
-                                          d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>
-                                </svg>
-                                Add
+                                    <a style="color: white; text-decoration:none;" href="reports.php" title="Back">
+                                        <svg width="16" height="16" fill="white" class="bi bi-arrow-left-circle" viewBox="0 0 16 16">
+                                            <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-4.5-.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z" />
+                                        </svg>
+                                        Back
+                                    </a>
+                                </button>
+
+                                <a href="sale_earn_dailyday_print.php" target="_blank">
+                                <button class="btn btn-sm btn-outline-success rounded-3" title="Print">  
+                                Print
+                                <svg width="16" height="16" fill="currentColor" class="bi bi-printer" viewBox="0 0 16 16">
+                                <path d="M2.5 8a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1z"/>
+                                <path d="M5 1a2 2 0 0 0-2 2v2H2a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h1v1a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-1h1a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-1V3a2 2 0 0 0-2-2H5zM4 3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2H4V3zm1 5a2 2 0 0 0-2 2v1H2a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v-1a2 2 0 0 0-2-2H5zm7 2v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1z"/>
+                                </svg>  
+                                </button>
+                                </a>
+
+                                <a href="#">
+                                <button class="btn btn-sm btn-outline-info rounded-3" title="Export Excel">
+                                    Export
+                                    <svg width="16" height="16" fill="currentColor" class="bi bi-file-earmark-spreadsheet" viewB="0 0 16 16">
+                                    <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V9H3V2a1 1 0 0 1 1-1h5.5v2zM3 12v-2h2v2H3zm0 1h2v2H4a1 1 0 0 1-1-1v-1zm3 2v-2h3v2H6zm4 0v-2h3v1a1 1 0 0 1-1 1h-2zm3-3h-3v-2h3v2zm-7 0v-2h3v2H6z"/>
+                                    </svg>
+                                </button>
                             </a>
-                            </button>
-                            </div>
+                    </div>    
                     </div>
 
-                    <div class="col-auto">
+                    <div class="col-auto mb-2">
                         <div><br></div>
                         <div > 
                             <form  action="#" method="GET" >

@@ -200,7 +200,7 @@ require_once 'inc/html_head.php';
                     items = new Array();
                     total = 0;
                     console.log(res);
-                    window.open('invoice.php?id=' + res, '_blank').focus();
+                    window.open('sale_print.php?id=' + res, '_blank').focus();
                 }
                 
             }, error: function(e){

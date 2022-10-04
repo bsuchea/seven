@@ -41,7 +41,7 @@ require_once 'inc/html_head.php';
                     // get sale report
                     $saleReportData = $con->prepare("SELECT tbl_sale.sale_id, tbl_sale.buyer_name,
                                     tbl_sale.buyer_phone, tbl_sale.sale_cost, tbl_sale.sale_date, 
-                                    tbl_sale.description, tbl_sale_detail.qty as qty 
+                                    tbl_sale_detail.qty as qty 
                                     FROM tbl_sale INNER JOIN tbl_sale_detail 
                                     ON tbl_sale.sale_id = tbl_sale_detail.sale_id
                                     WHERE tbl_sale.sale_date BETWEEN ? AND ? ORDER BY sale_date ASC");
@@ -72,6 +72,27 @@ require_once 'inc/html_head.php';
                                 </button>
                             </div>
                         </div>
+
+                        <div class="col-auto mt-5 mr-5">
+                        <a href="sale_earn_dailyday_print.php" target="_blank">
+                        <button class="btn btn-sm btn-outline-success rounded-3" title="Print">  
+                        Print
+                        <svg width="16" height="16" fill="currentColor" class="bi bi-printer" viewBox="0 0 16 16">
+                        <path d="M2.5 8a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1z"/>
+                        <path d="M5 1a2 2 0 0 0-2 2v2H2a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h1v1a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-1h1a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-1V3a2 2 0 0 0-2-2H5zM4 3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2H4V3zm1 5a2 2 0 0 0-2 2v1H2a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v-1a2 2 0 0 0-2-2H5zm7 2v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1z"/>
+                        </svg>  
+                        </button>
+                        </a>
+
+                        <a href="#">
+                        <button class="btn btn-sm btn-outline-info rounded-3" title="Export Excel">
+                            Export
+                            <svg width="16" height="16" fill="currentColor" class="bi bi-file-earmark-spreadsheet" viewB="0 0 16 16">
+                            <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V9H3V2a1 1 0 0 1 1-1h5.5v2zM3 12v-2h2v2H3zm0 1h2v2H4a1 1 0 0 1-1-1v-1zm3 2v-2h3v2H6zm4 0v-2h3v1a1 1 0 0 1-1 1h-2zm3-3h-3v-2h3v2zm-7 0v-2h3v2H6z"/>
+                            </svg>
+                        </button>
+                        </a>
+                        </div>  
 
                         <!-- form -->
                         <div class="container bg-white p-3 mt-3 shadow p-3 mb-2 bg-body rounded-4 text-center">
@@ -110,7 +131,6 @@ require_once 'inc/html_head.php';
                                                             <th class="cell">Buyer Name</th>
                                                             <th class="cell">Quantity</th>
                                                             <th class="cell">Amount($)</th>
-                                                            <th class="cell text-center">Actions</th>
                                                         </tr>
                                                     </thead>
 
@@ -124,22 +144,6 @@ require_once 'inc/html_head.php';
                                                                 <th class="cell"><?= $item['buyer_name'] ?></th>
                                                                 <th class="cell"><?= $item['qty'] ?></th>
                                                                 <th class="cell">$<?= $item['sale_cost'] ?></th>
-                                                                <th class="cell text-center">
-                                                                    <!-- show -->
-                                                                    <!-- <a href="view_sale_report_items.php?id=<?= $item['sale_id'] ?>" target="_blank" class="ml-1" title="View Detail">
-                                                                        <svg width="20" height="20" fill="green" class="bi bi-card-text" viewB="0 0 16 16">
-                                                                        <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
-                                                                        <path d="M3 5.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zM3 8a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9A.5.5 0 0 1 3 8zm0 2.5a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5z"/>
-                                                                        </svg>
-                                                                    </a> -->
-                                                                    <!-- print -->
-                                                                    <a href="sale_report_print.php?id=<?= $item['sale_id'] ?>" target="_blank" id="print_sale_report" title="Print">
-                                                                        <svg width="20" height="20" fill="green" class="bi bi-printer" viewB="0 0 16 16">
-                                                                        <path d="M2.5 8a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1z"/>
-                                                                        <path d="M5 1a2 2 0 0 0-2 2v2H2a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h1v1a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-1h1a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-1V3a2 2 0 0 0-2-2H5zM4 3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2H4V3zm1 5a2 2 0 0 0-2 2v1H2a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v-1a2 2 0 0 0-2-2H5zm7 2v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1z"/>
-                                                                        </svg>
-                                                                    </a>
-                                                                </th>
                                                             </tr>
                                                         <?php 
                                                                 $totalQTY += $item['qty']; 
