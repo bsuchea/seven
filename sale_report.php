@@ -39,12 +39,12 @@ require_once 'inc/html_head.php';
                 // if click on view sale
                 if(isset($_POST['view_sale'])) {
                     // get sale report
-                    $saleReportData = $con->prepare("SELECT tbl_sale.sale_id, tbl_sale.buyer_name,
-                                    tbl_sale.buyer_phone, tbl_sale.sale_cost, tbl_sale.sale_date, 
-                                    tbl_sale_detail.qty as qty 
-                                    FROM tbl_sale INNER JOIN tbl_sale_detail 
-                                    ON tbl_sale.sale_id = tbl_sale_detail.sale_id
-                                    WHERE tbl_sale.sale_date BETWEEN ? AND ? ORDER BY sale_date ASC");
+                    $saleReportData = $con->prepare("SELECT tbl_sale.*, tbl_sale_detail.sale_id, SUM(tbl_sale_detail.item_id)total_item, SUM(tbl_sale_detail.qty)total_qty 
+                                    FROM tbl_sale
+                                    INNER JOIN tbl_sale_detail ON tbl_sale.sale_id = tbl_sale_detail.sale_id
+                                    WHERE tbl_sale.sale_date BETWEEN ? AND ? 
+                                    GROUP BY tbl_sale_detail.sale_id
+                                    ORDER BY sale_date ASC");
                     $saleReportData->bindParam(1, $_POST['start_date']);
                     $saleReportData->bindParam(2, $_POST['last_date']);
                     $saleReportData->execute();
@@ -142,11 +142,11 @@ require_once 'inc/html_head.php';
                                                             <tr>
                                                                 <th class="cell"><?= $item['sale_date'] ?></th>
                                                                 <th class="cell"><?= $item['buyer_name'] ?></th>
-                                                                <th class="cell"><?= $item['qty'] ?></th>
+                                                                <th class="cell"><?= $item['total_qty'] ?></th>
                                                                 <th class="cell">$<?= $item['sale_cost'] ?></th>
                                                             </tr>
                                                         <?php 
-                                                                $totalQTY += $item['qty']; 
+                                                                $totalQTY += $item['total_qty']; 
                                                                 $total += $item['sale_cost']; 
                                                                 endforeach; 
                                                                 if($total > 0) {
