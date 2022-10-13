@@ -150,7 +150,7 @@ require_once 'inc/html_head.php';
 <script>
     let items = new Array();
     let total = 0;
-
+    let newRowContent
     $(document).ready(function(){
         $("#salary_date").val(new Date().toISOString().slice(0, 10));
     });
@@ -159,33 +159,42 @@ require_once 'inc/html_head.php';
         if($('#vendor_name').val() == "") {errmsg('Please select Vendor Name!'); return false;}
         if($('#salary').val() == "") {errmsg('Please insert Salary!'); return false; }
 
-        let newRowContent = "<td>"+$('#vendor_name option:selected').text() +"</td>" + "<td>"+$('#salary').val() +"</td>" + "<td>"+$('#bonus').val() +"</td>" + "<td>"+$('#salary_date').val() +"</td>" +"<td>"+$('#notes').val() +"</td>";
+         newRowContent = "<td>"+$('#vendor_name option:selected').text() +"</td>" + "<td>"+$('#salary').val() +"</td>" + "<td>"+$('#bonus').val() +"</td>" + "<td>"+$('#salary_date').val() +"</td>" +"<td>"+$('#notes').val() +"</td>";
 
         $("#tblsalary tbody").append("<tr>"+newRowContent+"</tr>");
-
+     
+            uid=$('#vendor_name').val(),
+           salary=$('#salary').val(),
+           bonus= $('#bonus').val(),
+           salary_date=  $("#salary_date").val(),
+           notes= $("#notes").val(),
+           
+           item = {uid: uid, salary: salary, bonus:bonus, salary_date: salary_date,notes:notes};
+        items.push(item);
         console.log('working!' + JSON.stringify(items));
         return false;
     });
         
     $("#btnSalary").click(function(){
-        em = $("#suppliers_name").val();
-        date = $("#purchase_date").val();
+
         $.ajax({
             // url: 'ajax/purchase.php?em='+em+'+date='+date,
-            url: 'ajax/purchase.php',
+            url: 'ajax/salary.php',
             cache: false,
-            data: {items: items, em: em, d: date},
+            data: {items: items},
             success: function(res){
+          
                 if(res == 'success'){
                     // success
-                    $("#suppliers_name").val('');
-                    $("#purchase_date").val(new Date().toISOString().slice(0, 10));
-                    $('#item_name').val('');
-                    $('#purchase_qty').val('');
-                    $('#purchase_unit_price').val('');
-                    $("#total").text("");
+                    $('#vendor_name').val(""),
+                    $('#salary').val(""),
+                    $('#bonus').val(""),
+                    $("#salary_date").val(new Date().toISOString().slice(0, 10));
+                    $("#notes").val(""),
+                    $("#tblsalary tbody").html("");
                     items = new Array();
                     total = 0;
+                    
                 }
                 Swal.fire(res, '', 'success');
             }, error: function(e){

@@ -9,8 +9,10 @@ try{
     $total = $_GET['tol'];
     $items = $_GET['items'];
 
+
     $query = $con->prepare("INSERT INTO tbl_sale VALUES(NULL, ?, ?, ?, ?)");
     $query->bindParam(1, $buyer_name);
+
     $query->bindParam(2, $buyer_phone);
     $query->bindParam(3, $total);
     $query->bindParam(4, $date);
