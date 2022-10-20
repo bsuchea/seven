@@ -38,7 +38,7 @@ require_once 'inc/html_head.php';
 
                 $date = date('Y-m-d');
 
-                $sql_select = $con->prepare("SELECT buyer_name, sale_date, sale_cost FROM tbl_sale WHERE sale_date LIKE '$date%' ORDER BY sale_id ASC LIMIT $start_from, $limit");
+                $sql_select = $con->prepare("SELECT buyer_name, sale_date, sale_cost FROM tbl_sale WHERE MONTH(sale_date) = MONTH(CURRENT_DATE()) AND YEAR(sale_date) = YEAR(CURRENT_DATE()) ORDER BY sale_id ASC LIMIT $start_from, $limit");
                 $sql_select->execute();
 
                 $i = 0;
