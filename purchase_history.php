@@ -125,13 +125,13 @@ require_once 'inc/html_head.php';
                                                 <td><?= $row->purchase_total ?>$</td>
                                                 <td><?= $row->purchase_date ?></td>
                                                 <td class="td-actions text-center">
-                                                    <a href="view_purchase.php?id=<?= $row->purchase_id ?>" class="ml-1" title="View Detail">
+                                                    <a href="purchase_details.php?id=<?= $row->purchase_id ?>" class="ml-1" title="View Detail">
                                                         <svg width="20" height="20" fill="green" class="bi bi-card-text" viewB="0 0 16 16">
                                                         <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
                                                         <path d="M3 5.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zM3 8a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9A.5.5 0 0 1 3 8zm0 2.5a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5z"/>
                                                         </svg>
                                                     </a>
-                                                    <a href="#" id="print_purchase" title="Print">
+                                                    <a href="purchase_print.php?id=<?= $row->purchase_id ?>" id="print_purchase" title="Print" target="_blank" >
                                                         <svg width="20" height="20" fill="green" class="bi bi-printer" viewB="0 0 16 16">
                                                         <path d="M2.5 8a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1z"/>
                                                         <path d="M5 1a2 2 0 0 0-2 2v2H2a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h1v1a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-1h1a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-1V3a2 2 0 0 0-2-2H5zM4 3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2H4V3zm1 5a2 2 0 0 0-2 2v1H2a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v-1a2 2 0 0 0-2-2H5zm7 2v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1z"/>

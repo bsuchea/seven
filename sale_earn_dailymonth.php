@@ -110,7 +110,7 @@ require_once 'inc/html_head.php';
                                                         <td class="text-center"><?= $i ?></td>
                                                         <td><?= $row['buyer_name'] ?></td>
                                                         <td><?= $row['sale_date'] ?></td>
-                                                        <td><?= $row['sale_cost'] ?></td>
+                                                        <td><?= $row['sale_cost'] ?>$</td>
                                                     </tr>
                                                 <?php 
                                                     $totalAmount += $row['sale_cost'];

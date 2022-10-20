@@ -81,7 +81,7 @@ require_once 'inc/html_head.php';
                                                 <td class="text-center"><?= $i ?></td>
                                                 <td><?= $row->item_name ?></td>
                                                 <td><?= $row->current_stock ?></td>
-                                                <td class="text-center"><span class="badge bg-danger text-white">Lowest</span></td>
+                                                <td class="text-center"><span class="badge bg-danger text-white">Low Stock</span></td>
                                             </tr>
                                         <?php endwhile; ?>
                                         </tbody>

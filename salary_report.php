@@ -41,7 +41,7 @@ require_once 'inc/html_head.php';
                                     </a>
                                 </button>
 
-                                <a href="sale_earn_dailyday_print.php" target="_blank">
+                                <a href="salary_print_report.php" target="_blank">
                                 <button class="btn btn-sm btn-outline-success rounded-3" title="Print">  
                                 Print
                                 <svg width="16" height="16" fill="currentColor" class="bi bi-printer" viewBox="0 0 16 16">

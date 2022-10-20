@@ -156,7 +156,7 @@ require_once 'inc/html_head.php';
                                                         <tr>
                                                             <th class="cell text-center" colspan="2" style="color: green;">SubTotal</th>
                                                             <th class="cell" style="color: green;"><?= $totalQTY ?></th>
-                                                            <th class="cell" style="color: green;">$<?= $total ?></th>
+                                                            <th class="cell" style="color: green;">$<?= $total ?>.00</th>
                                                         </tr>
 
                                                         <?php }} ?>
